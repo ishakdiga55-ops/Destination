@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وكالة الحج والعمرة | ضيوف الرحمن</title>
+    <title>متجر الهواتف الذكية | TECH STORE</title>
     
-    <!-- خط عربي حديث وفخم -->
+    <!-- خط عربي حديث -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
     
     <!-- مكتبة GSAP للحركات -->
@@ -14,13 +14,12 @@
 
     <style>
         :root {
-            /* ألوان فاخرة مستوحاة من إعلان الكيبورد (أسود عميق + ذهبي/أخضر نيون) */
-            --bg-dark: #050806;
-            --bg-lighter: #0a110e;
-            --primary-gold: #d4af37;
-            --gold-glow: rgba(212, 175, 55, 0.4);
+            /* ألوان مستوحاة من إعلان الكيبورد (تكنولوجيا وفخامة) */
+            --bg-dark: #09090b;       /* أسود عميق */
+            --bg-lighter: #18181b;    /* رمادي داكن */
+            --neon-green: #ccff00;    /* أخضر نيون (مستوحى من الصور) */
             --text-white: #ffffff;
-            --text-gray: #88928d;
+            --text-gray: #a1a1aa;
         }
 
         * {
@@ -34,11 +33,11 @@
             background-color: var(--bg-dark);
             color: var(--text-white);
             overflow-x: hidden;
-            /* تدرج خفيف في الخلفية يعطي عمقاً */
+            /* تدرج خفيف يعطي عمقاً للخلفية */
             background-image: radial-gradient(circle at 50% 0%, var(--bg-lighter) 0%, var(--bg-dark) 70%);
         }
 
-        /* شبكة خفيفة جداً في الخلفية لتعطي طابعاً تقنياً */
+        /* شبكة خفيفة في الخلفية لتعطي طابعاً تقنياً */
         .grid-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -50,7 +49,7 @@
             pointer-events: none;
         }
 
-        /* --- شريط التنقل العلوي --- */
+        /* --- شريط التنقل --- */
         nav {
             position: fixed;
             top: 0; width: 100%;
@@ -59,13 +58,13 @@
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: linear-gradient(to bottom, rgba(5,8,6,0.9), transparent);
+            background: linear-gradient(to bottom, rgba(9,9,11,0.9), transparent);
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 900;
-            color: var(--primary-gold);
+            color: var(--neon-green);
             letter-spacing: 2px;
         }
 
@@ -83,7 +82,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--primary-gold);
+            color: var(--neon-green);
         }
 
         /* --- قسم الواجهة الرئيسية (Hero) --- */
@@ -96,9 +95,9 @@
             align-items: center;
             z-index: 10;
             text-align: center;
+            padding: 0 20px;
         }
 
-        /* النص الصغير العلوي (مثل التصميم الذي أرسلته) */
         .hero-top-text {
             font-size: 0.8rem;
             color: var(--text-gray);
@@ -118,7 +117,6 @@
             background-color: var(--text-gray);
         }
 
-        /* العنوان الرئيسي الضخم */
         .hero-title {
             font-size: clamp(3rem, 8vw, 6rem);
             font-weight: 900;
@@ -128,11 +126,10 @@
         }
 
         .hero-title span {
-            /* تأثير النص المتدرج الذهبي */
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            /* تأثير النص المتدرج باللون النيون */
+            color: var(--neon-green);
             display: block;
+            text-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
         }
 
         .hero-subtitle {
@@ -143,11 +140,11 @@
             margin-bottom: 40px;
         }
 
-        /* زر الحجز الفاخر */
+        /* زر التسوق */
         .cta-button {
-            background: transparent;
-            border: 1px solid var(--primary-gold);
-            color: var(--primary-gold);
+            background: var(--neon-green);
+            border: none;
+            color: var(--bg-dark);
             padding: 15px 40px;
             font-size: 1rem;
             font-family: 'Cairo', sans-serif;
@@ -155,56 +152,31 @@
             border-radius: 5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
         }
 
         .cta-button:hover {
-            background: var(--primary-gold);
-            color: var(--bg-dark);
-            box-shadow: 0 0 30px var(--gold-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(204, 255, 0, 0.6);
         }
 
-        /* العنصر البصري المركزي (بدلاً من الكيبورد في الصورة) */
-        /* سنستخدم صورة ظلية للمسجد الحرام أو طائرة فاخرة */
-        .hero-visual {
+        /* تأثير العنصر البصري المركزي (توهج خلفي) */
+        .hero-visual-glow {
             position: absolute;
-            bottom: -5vh;
-            width: 80vw;
-            max-width: 800px;
-            height: 50vh;
-            background-image: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=2070&auto=format&fit=crop'); /* صورة خلفية سينمائية */
-            background-size: cover;
-            background-position: center top;
-            -webkit-mask-image: linear-gradient(to top, transparent 0%, black 90%);
-            mask-image: linear-gradient(to top, transparent 0%, black 90%);
-            opacity: 0.4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: var(--neon-green);
+            filter: blur(150px);
+            opacity: 0.15;
             z-index: -1;
-            filter: sepia(1) hue-rotate(10deg) brightness(0.6) contrast(1.2); /* فلتر سينمائي */
+            border-radius: 50%;
         }
 
-        /* لمسات تقنية (أرقام وإطارات) */
-        .tech-label {
-            position: absolute;
-            font-size: 0.7rem;
-            color: var(--text-gray);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        
-        .label-1 { top: 30%; left: 10%; }
-        .label-2 { top: 70%; right: 10%; text-align: right; }
-        .label-3 { top: 40%; right: 15%; }
-
-        .tech-line {
-            position: absolute;
-            background: rgba(255,255,255,0.1);
-        }
-        .line-1 { top: 30%; left: 15%; width: 50px; height: 1px; }
-        .line-2 { top: 70%; right: 15%; width: 50px; height: 1px; }
-
-        /* --- قسم الباقات (الأسفل) --- */
-        .packages {
+        /* --- قسم المنتجات (الأسفل) --- */
+        .products {
             padding: 100px 50px;
             background-color: var(--bg-dark);
             position: relative;
@@ -224,18 +196,66 @@
         }
 
         .section-header p {
-            color: var(--primary-gold);
+            color: var(--neon-green);
             letter-spacing: 2px;
             font-size: 0.9rem;
         }
 
-        /* تجاوب مع الجوال */
+        /* شبكة المنتجات */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* بطاقة المنتج (بأسلوب Glassmorphism) */
+        .product-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 30px rgba(204, 255, 0, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background-color: var(--bg-lighter);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
         @media (max-width: 768px) {
             nav { padding: 20px; }
-            .nav-links { display: none; } /* إخفاء الروابط في الجوال */
-            .hero-visual { opacity: 0.2; height: 40vh; }
-            .tech-label, .tech-line { display: none; } /* إخفاء اللمسات التقنية في الشاشات الصغيرة */
-            .hero-title { font-size: 3rem; }
+            .nav-links { display: none; }
+            .products { padding: 50px 20px; }
         }
     </style>
 </head>
@@ -246,48 +266,65 @@
 
     <!-- شريط التنقل -->
     <nav>
-        <div class="logo">DESTINATION</div>
+        <div class="logo">TECH ZONE</div>
         <div class="nav-links">
             <a href="#">الرئيسية</a>
-            <a href="#">باقات الحج</a>
-            <a href="#">باقات العمرة</a>
+            <a href="#">الهواتف الذكية</a>
+            <a href="#">الإكسسوارات</a>
             <a href="#">اتصل بنا</a>
         </div>
-        <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem;">احجز الآن</button>
+        <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem;">تسوق الآن</button>
     </nav>
 
     <!-- القسم الرئيسي -->
     <section class="hero">
-        <!-- صورة الخلفية السينمائية (المسجد الحرام) -->
-        <div class="hero-visual"></div>
-
-        <!-- لمسات تقنية -->
-        <div class="tech-label label-1">01 // HAJJ & UMRAH</div>
-        <div class="tech-line line-1"></div>
-        
-        <div class="tech-label label-2">PREMIUM EXPERIENCE<br>DESIGNED FOR COMFORT</div>
-        <div class="tech-line line-2"></div>
-
-        <div class="tech-label label-3">بكل طمأنينة<br>وراحة بال</div>
+        <!-- التوهج الخلفي -->
+        <div class="hero-visual-glow"></div>
 
         <!-- المحتوى النصي -->
-        <div class="hero-top-text">THE ULTIMATE JOURNEY</div>
+        <div class="hero-top-text">NEXT GENERATION TECH</div>
         <h1 class="hero-title">
-            ضيوف الرحمن
-            <span>لبيك اللهم لبيك</span>
+            اكتشف المستقبل
+            <span>بين يديك</span>
         </h1>
-        <p class="hero-subtitle">نقدم لكم أرقى باقات الحج والعمرة، المصممة بعناية لتناسب احتياجاتكم وتضمن لكم رحلة إيمانية لا تُنسى بكل راحة ورفاهية.</p>
+        <p class="hero-subtitle">أحدث الهواتف الذكية والأجهزة اللوحية بأفضل الأسعار. تكنولوجيا متطورة، تصميم أنيق، وأداء لا يعرف الحدود.</p>
         
-        <button class="cta-button">استكشف الباقات</button>
+        <button class="cta-button">استكشف الأجهزة</button>
     </section>
 
-    <!-- قسم الباقات (يظهر عند التمرير) -->
-    <section class="packages">
+    <!-- قسم المنتجات (يظهر عند التمرير) -->
+    <section class="products">
         <div class="section-header">
-            <h2>رحلتك الإيمانية تبدأ هنا</h2>
-            <p>CHOOSE YOUR PACKAGE</p>
+            <h2>أحدث الإصدارات</h2>
+            <p>FEATURED PRODUCTS</p>
         </div>
-        <!-- سيتم إضافة بطاقات الباقات هنا لاحقاً -->
+        
+        <!-- شبكة المنتجات -->
+        <div class="product-grid">
+            <!-- بطاقة 1 -->
+            <div class="product-card">
+                <div class="product-image">صورة الهاتف 1</div>
+                <h3>iPhone 15 Pro Max</h3>
+                <div class="product-price">$1,199</div>
+                <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">أضف للسلة</button>
+            </div>
+            
+            <!-- بطاقة 2 -->
+            <div class="product-card">
+                <div class="product-image">صورة الهاتف 2</div>
+                <h3>Samsung Galaxy S24 Ultra</h3>
+                <div class="product-price">$1,299</div>
+                <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">أضف للسلة</button>
+            </div>
+
+            <!-- بطاقة 3 -->
+            <div class="product-card">
+                <div class="product-image">صورة الهاتف 3</div>
+                <h3>Google Pixel 8 Pro</h3>
+                <div class="product-price">$999</div>
+                <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">أضف للسلة</button>
+            </div>
+        </div>
     </section>
 
     <script>
@@ -299,17 +336,19 @@
         gsap.from(".hero-title", { y: 30, opacity: 0, duration: 1, delay: 0.4 });
         gsap.from(".hero-subtitle", { y: 30, opacity: 0, duration: 1, delay: 0.6 });
         gsap.from(".cta-button", { y: 20, opacity: 0, duration: 1, delay: 0.8 });
-        gsap.from(".hero-visual", { y: 50, opacity: 0, duration: 1.5, delay: 0.2, ease: "power3.out" });
+        
+        // تأثير التوهج
+        gsap.from(".hero-visual-glow", { scale: 0, opacity: 0, duration: 2, delay: 0.2, ease: "power3.out" });
 
-        // حركة خفيفة للصورة الخلفية عند التمرير (Parallax)
-        gsap.to(".hero-visual", {
-            y: 100,
-            ease: "none",
+        // حركة ظهور البطاقات عند التمرير
+        gsap.from(".product-card", {
+            y: 50,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2, // ظهورها واحدة تلو الأخرى
             scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
+                trigger: ".products",
+                start: "top 80%", // تبدأ الحركة عندما يظهر القسم
             }
         });
     </script>
