@@ -5,12 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>وكالة الحج والعمرة | ضيوف الرحمن</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
+    <!-- خط عربي حديث وفخم -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
     
+    <!-- مكتبة GSAP للحركات -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
+        :root {
+            /* ألوان فاخرة مستوحاة من إعلان الكيبورد (أسود عميق + ذهبي/أخضر نيون) */
+            --bg-dark: #050806;
+            --bg-lighter: #0a110e;
+            --primary-gold: #d4af37;
+            --gold-glow: rgba(212, 175, 55, 0.4);
+            --text-white: #ffffff;
+            --text-gray: #88928d;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,264 +30,287 @@
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #06120e; 
-            color: white;
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
             overflow-x: hidden;
+            /* تدرج خفيف في الخلفية يعطي عمقاً */
+            background-image: radial-gradient(circle at 50% 0%, var(--bg-lighter) 0%, var(--bg-dark) 70%);
         }
 
-        .hero-section {
+        /* شبكة خفيفة جداً في الخلفية لتعطي طابعاً تقنياً */
+        .grid-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- شريط التنقل العلوي --- */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(5,8,6,0.9), transparent);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* --- قسم الواجهة الرئيسية (Hero) --- */
+        .hero {
             position: relative;
             height: 100vh;
-            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-        }
-
-        #globe-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        /* تصميم الطائرة */
-        .airplane-container {
-            position: absolute;
-            z-index: 5;
-            /* نضعها مبدئياً فوق الجزائر تقريباً (في المنتصف) */
-            top: 55%;
-            left: 50%;
-            width: 80px;
-            height: 80px;
-            pointer-events: none;
-            /* تدوير الطائرة لتبدو متجهة نحو الشرق */
-            transform: translate(-50%, -50%) rotate(-45deg); 
-        }
-
-        .airplane-container img {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); /* توهج ذهبي للطائرة */
-        }
-
-        .hero-content {
-            position: relative;
             z-index: 10;
             text-align: center;
-            pointer-events: none;
-            padding: 0 20px;
-            background: radial-gradient(circle, rgba(6,18,14,0.7) 0%, rgba(6,18,14,0) 70%);
-            margin-top: 50px; /* إنزال النص قليلاً ليتناسب مع الحجم الجديد */
+        }
+
+        /* النص الصغير العلوي (مثل التصميم الذي أرسلته) */
+        .hero-top-text {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hero-top-text::before, .hero-top-text::after {
+            content: "";
+            width: 30px;
+            height: 1px;
+            background-color: var(--text-gray);
+        }
+
+        /* العنوان الرئيسي الضخم */
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .hero-title span {
+            /* تأثير النص المتدرج الذهبي */
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
         }
 
         .hero-subtitle {
-            font-size: 1.4rem;
-            color: #d4af37;
-            margin-bottom: 20px;
-            font-family: 'Amiri', serif;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 40px;
         }
 
-        .hero-title {
-            font-size: clamp(2.5rem, 7vw, 5rem);
-            font-weight: 900;
-            line-height: 1.3;
-            text-shadow: 0 10px 40px rgba(0,0,0,0.9);
+        /* زر الحجز الفاخر */
+        .cta-button {
+            background: transparent;
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            background: var(--primary-gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 30px var(--gold-glow);
+        }
+
+        /* العنصر البصري المركزي (بدلاً من الكيبورد في الصورة) */
+        /* سنستخدم صورة ظلية للمسجد الحرام أو طائرة فاخرة */
+        .hero-visual {
+            position: absolute;
+            bottom: -5vh;
+            width: 80vw;
+            max-width: 800px;
+            height: 50vh;
+            background-image: url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=2070&auto=format&fit=crop'); /* صورة خلفية سينمائية */
+            background-size: cover;
+            background-position: center top;
+            -webkit-mask-image: linear-gradient(to top, transparent 0%, black 90%);
+            mask-image: linear-gradient(to top, transparent 0%, black 90%);
+            opacity: 0.4;
+            z-index: -1;
+            filter: sepia(1) hue-rotate(10deg) brightness(0.6) contrast(1.2); /* فلتر سينمائي */
+        }
+
+        /* لمسات تقنية (أرقام وإطارات) */
+        .tech-label {
+            position: absolute;
+            font-size: 0.7rem;
+            color: var(--text-gray);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
         
-        .hero-title span {
-            color: #d4af37;
-        }
+        .label-1 { top: 30%; left: 10%; }
+        .label-2 { top: 70%; right: 10%; text-align: right; }
+        .label-3 { top: 40%; right: 15%; }
 
-        .packages-section {
+        .tech-line {
+            position: absolute;
+            background: rgba(255,255,255,0.1);
+        }
+        .line-1 { top: 30%; left: 15%; width: 50px; height: 1px; }
+        .line-2 { top: 70%; right: 15%; width: 50px; height: 1px; }
+
+        /* --- قسم الباقات (الأسفل) --- */
+        .packages {
+            padding: 100px 50px;
+            background-color: var(--bg-dark);
             position: relative;
             z-index: 10;
-            background-color: #06120e;
-            min-height: 100vh;
-            padding: 80px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .section-header {
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 60px;
         }
 
-        .section-title {
+        .section-header h2 {
             font-size: 2.5rem;
-            margin-bottom: 20px;
             font-weight: 700;
-            color: #d4af37;
+            margin-bottom: 10px;
         }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #06120e; }
-        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
+        .section-header p {
+            color: var(--primary-gold);
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+
+        /* تجاوب مع الجوال */
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .nav-links { display: none; } /* إخفاء الروابط في الجوال */
+            .hero-visual { opacity: 0.2; height: 40vh; }
+            .tech-label, .tech-line { display: none; } /* إخفاء اللمسات التقنية في الشاشات الصغيرة */
+            .hero-title { font-size: 3rem; }
+        }
     </style>
 </head>
 <body>
 
-    <section class="hero-section">
-        <div id="globe-container"></div>
-        
-        <!-- إضافة الطائرة (استخدمت أيقونة SVG مجانية) -->
-        <div class="airplane-container" id="airplane">
-            <img src="https://cdn-icons-png.flaticon.com/512/7893/7893979.png" alt="طائرة">
-        </div>
+    <!-- شبكة الخلفية -->
+    <div class="grid-overlay"></div>
 
-        <div class="hero-content">
-            <div class="hero-subtitle">بكل طمأنينة وراحة بال</div>
-            <h1 class="hero-title">لبيك اللهم لبيك<br><span>ضيوف الرحمن</span></h1>
+    <!-- شريط التنقل -->
+    <nav>
+        <div class="logo">DESTINATION</div>
+        <div class="nav-links">
+            <a href="#">الرئيسية</a>
+            <a href="#">باقات الحج</a>
+            <a href="#">باقات العمرة</a>
+            <a href="#">اتصل بنا</a>
         </div>
+        <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem;">احجز الآن</button>
+    </nav>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <!-- صورة الخلفية السينمائية (المسجد الحرام) -->
+        <div class="hero-visual"></div>
+
+        <!-- لمسات تقنية -->
+        <div class="tech-label label-1">01 // HAJJ & UMRAH</div>
+        <div class="tech-line line-1"></div>
+        
+        <div class="tech-label label-2">PREMIUM EXPERIENCE<br>DESIGNED FOR COMFORT</div>
+        <div class="tech-line line-2"></div>
+
+        <div class="tech-label label-3">بكل طمأنينة<br>وراحة بال</div>
+
+        <!-- المحتوى النصي -->
+        <div class="hero-top-text">THE ULTIMATE JOURNEY</div>
+        <h1 class="hero-title">
+            ضيوف الرحمن
+            <span>لبيك اللهم لبيك</span>
+        </h1>
+        <p class="hero-subtitle">نقدم لكم أرقى باقات الحج والعمرة، المصممة بعناية لتناسب احتياجاتكم وتضمن لكم رحلة إيمانية لا تُنسى بكل راحة ورفاهية.</p>
+        
+        <button class="cta-button">استكشف الباقات</button>
     </section>
 
-    <section class="packages-section">
-        <h2 class="section-title">رحلتك الإيمانية تبدأ هنا</h2>
-        <p style="color: #94a3b8; font-size: 1.2rem;">اكتشف باقاتنا الحصرية للحج والعمرة المصممة لراحتك</p>
+    <!-- قسم الباقات (يظهر عند التمرير) -->
+    <section class="packages">
+        <div class="section-header">
+            <h2>رحلتك الإيمانية تبدأ هنا</h2>
+            <p>CHOOSE YOUR PACKAGE</p>
+        </div>
+        <!-- سيتم إضافة بطاقات الباقات هنا لاحقاً -->
     </section>
 
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-        }
-    }
-    </script>
-
-    <script type="module">
-        import * as THREE from 'three';
-        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-
-        // --- إعدادات Three.js ---
-        const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x06120e, 0.02); 
-
-        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        document.getElementById('globe-container').appendChild(renderer.domElement);
-
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableZoom = false;
-        controls.enablePan = false;
-        controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.3; 
-        controls.enableDamping = true;
-        controls.dampingFactor = 0.05;
-
-        // إنشاء الكرة
-        const geometry = new THREE.SphereGeometry(2, 64, 64);
-        const textureLoader = new THREE.TextureLoader();
-        const earthTexture = textureLoader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
-        
-        const material = new THREE.MeshStandardMaterial({
-            map: earthTexture,
-            roughness: 0.8,
-            metalness: 0.1,
-        });
-
-        const earth = new THREE.Mesh(geometry, material);
-        
-        // --- توجيه الكرة نحو الجزائر (شمال أفريقيا) ---
-        // الرقم 1.57 (تقريباً باي/2) يجعل قارة أفريقيا في المنتصف
-        earth.rotation.y = 1.57; 
-        
-        scene.add(earth);
-
-        const atmosphereGeometry = new THREE.SphereGeometry(2.05, 64, 64);
-        const atmosphereMaterial = new THREE.MeshBasicMaterial({
-            color: 0xd4af37,
-            transparent: true,
-            opacity: 0.1,
-            side: THREE.BackSide
-        });
-        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-        atmosphere.rotation.y = 1.57;
-        scene.add(atmosphere);
-
-        // الإضاءة
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        scene.add(ambientLight);
-
-        const directionalLight = new THREE.DirectionalLight(0xffd700, 2);
-        directionalLight.position.set(5, 3, 5);
-        scene.add(directionalLight);
-
-        // --- تصغير الكرة الأرضية ---
-        const updateGlobePosition = () => {
-            if (window.innerWidth > 768) {
-                earth.position.x = 2.5;
-                atmosphere.position.x = 2.5;
-                camera.position.z = 10; // تم زيادة الرقم لتبدو الكرة أصغر
-            } else {
-                earth.position.x = 0;
-                earth.position.y = 0.2;
-                atmosphere.position.x = 0;
-                atmosphere.position.y = 0.2;
-                camera.position.z = 9; // تصغير الكرة في الجوال
-            }
-        };
-        updateGlobePosition();
-
-        // --- حركات GSAP ---
+    <script>
+        // تسجيل ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
-        // 1. حركة الكرة الأرضية عند التمرير
-        gsap.to(earth.rotation, {
-            y: earth.rotation.y + Math.PI * 1.5, 
-            x: Math.PI / 6,
+        // حركة ظهور العناصر عند تحميل الصفحة
+        gsap.from(".hero-top-text", { y: -20, opacity: 0, duration: 1, delay: 0.2 });
+        gsap.from(".hero-title", { y: 30, opacity: 0, duration: 1, delay: 0.4 });
+        gsap.from(".hero-subtitle", { y: 30, opacity: 0, duration: 1, delay: 0.6 });
+        gsap.from(".cta-button", { y: 20, opacity: 0, duration: 1, delay: 0.8 });
+        gsap.from(".hero-visual", { y: 50, opacity: 0, duration: 1.5, delay: 0.2, ease: "power3.out" });
+
+        // حركة خفيفة للصورة الخلفية عند التمرير (Parallax)
+        gsap.to(".hero-visual", {
+            y: 100,
             ease: "none",
             scrollTrigger: {
                 trigger: "body",
                 start: "top top",
-                end: "bottom bottom",
-                scrub: 2 
+                end: "bottom top",
+                scrub: true
             }
-        });
-        gsap.to(atmosphere.rotation, {
-            y: atmosphere.rotation.y + Math.PI * 1.5,
-            x: Math.PI / 6,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "bottom bottom",
-                scrub: 2
-            }
-        });
-
-        // 2. حركة الطائرة (تطير من الجزائر نحو مكة عند التمرير)
-        gsap.to("#airplane", {
-            top: "10%",           // ترتفع للأعلى
-            left: "85%",          // تتجه لليمين (ناحية الشرق حيث مكة)
-            scale: 2.5,           // تكبر وكأنها تقترب من المشاهد
-            rotation: 20,         // تغير زاوية ميلانها
-            opacity: 0,           // تختفي تدريجياً وكأنها دخلت السحاب
-            ease: "power2.inOut",
-            scrollTrigger: {
-                trigger: "body",
-                start: "top top",
-                end: "50% top",   // تنتهي الحركة عند منتصف التمرير
-                scrub: 1.5
-            }
-        });
-
-        // --- حلقة الرسم ---
-        function animate() {
-            requestAnimationFrame(animate);
-            controls.update();
-            renderer.render(scene, camera);
-        }
-        animate();
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            updateGlobePosition();
         });
     </script>
 </body>
