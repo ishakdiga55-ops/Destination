@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Destination | السفر يعاد تعريفه</title>
+    <title>وكالة الحج والعمرة |.en ضيوف الرحمن</title>
     
-    <!-- استدعاء خط عربي جميل -->
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "أميري" أو " falseتجوال") -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     
     <!-- استدعاء مكتبة GSAP للحركات -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -22,7 +22,8 @@
 
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #0f172a; /* لون أزرق داكن جداً كخلفية احتياطية */
+            /* لون خلفية أخضر داكن جداً يبعث على الطمأنينة (بدلاً من الأزرق) */
+            background-color: #06120e; 
             color: white;
             overflow-x: hidden;
         }
@@ -39,68 +40,72 @@
             overflow: hidden;
         }
 
-        /* حاوية الكرة الأرضية 3D */
         #globe-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* خلف النص */
+            z-index: 1;
         }
 
         /* النص فوق الكرة */
         .hero-content {
             position: relative;
-            z-index: 10; /* أمام الكرة */
+            z-index: 10;
             text-align: center;
-            pointer-events: none; /* لكي يتمكن المستخدم من تدوير الكرة من خلف النص */
+            pointer-events: none;
             padding: 0 20px;
+            background: radial-gradient(circle, rgba(6,18,14,0.7) 0%, rgba(6,18,14,0) 70%); /* تعتيم خلف النص لبروزه */
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
-            color: #facc15; /* لون ذهبي */
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: #d4af37; /* لون ذهبي فخم */
+            margin-bottom: 20px;
             letter-spacing: 2px;
-            font-weight: 700;
+            font-family: 'Amiri', serif; /* خط عربي كلاسيكي للنصوص الدينية */
         }
 
         .hero-title {
-            font-size: clamp(2.5rem, 6vw, 4.5rem); /* حجم متجاوب مع الشاشة */
+            font-size: clamp(2.5rem, 7vw, 5rem);
             font-weight: 900;
-            line-height: 1.2;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.8); /* ظل ليظهر النص فوق أي خلفية */
+            line-height: 1.3;
+            text-shadow: 0 10px 40px rgba(0,0,0,0.9);
+        }
+        
+        .hero-title span {
+            color: #d4af37; /* تمييز كلمة أو جملة بالذهبي */
         }
 
-        /* قسم الوجهات (الذي يظهر عند التمرير) */
-        .destinations-section {
+        /* قسم الباقات (الذي يظهر عند التمرير) */
+        .packages-section {
             position: relative;
             z-index: 10;
-            background-color: #0f172a;
+            background-color: #06120e;
             min-height: 100vh;
             padding: 80px 20px;
             text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(212, 175, 55, 0.2); /* خط ذهبي خفيف */
         }
 
         .section-title {
             font-size: 2.5rem;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             font-weight: 700;
+            color: #d4af37;
         }
 
-        /* قسم توضيحي للبطاقات */
-        .placeholder-text {
+        .section-subtitle {
             color: #94a3b8;
             font-size: 1.2rem;
+            margin-bottom: 50px;
         }
 
-        /* إخفاء شريط التمرير لمظهر أنيق */
+        /* إخفاء شريط التمرير */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        ::-webkit-scrollbar-track { background: #06120e; }
+        ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -110,18 +115,19 @@
         <div id="globe-container"></div>
         
         <div class="hero-content">
-            <div class="hero-subtitle">السفر يعاد تعريفه</div>
-            <h1 class="hero-title">باريس تبدأ<br>قبل أن تهبط.</h1>
+            <div class="hero-subtitle">بكل طمأنينة وراحة بال</div>
+            <h1 class="hero-title">لبيك اللهم لبيك<br><span>ضيوف الرحمن</span></h1>
         </div>
     </section>
 
-    <!-- 2. القسم الثاني: الوجهات الحصرية -->
-    <section class="destinations-section">
-        <h2 class="section-title">وجهات حصرية</h2>
-        <p class="placeholder-text">هنا سنقوم بإضافة بطاقات الوجهات السياحية قريباً...</p>
+    <!-- 2. القسم الثاني: باقات العمرة والحج -->
+    <section class="packages-section">
+        <h2 class="section-title">رحلتك الإيمانية تبدأ هنا</h2>
+        <p class="section-subtitle">اكتشف باقاتنا الحصرية للحج والعمرة المصممة لراحتك</p>
+        <!-- سيتم إضافة بطاقات الباقات هنا لاحقاً -->
     </section>
 
-    <!-- استدعاء Three.js (الحديث) -->
+    <!-- استدعاء Three.js -->
     <script type="importmap">
     {
         "imports": {
@@ -138,8 +144,8 @@
 
         // --- إعدادات Three.js ---
         const scene = new THREE.Scene();
-        // إضافة ضباب لدمج الكرة مع الخلفية
-        scene.fog = new THREE.FogExp2(0x0f172a, 0.02); 
+        // ضباب بلون الخلفية الجديدة (الأخضر الداكن)
+        scene.fog = new THREE.FogExp2(0x06120e, 0.02); 
 
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
@@ -147,19 +153,18 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('globe-container').appendChild(renderer.domElement);
 
-        // التحكم بالكرة
+        // التحكم
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableZoom = false;
-        controls.enablePan = false;
+        controls;
         controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.5;
+        controls.autoRotateSpeed = 0.3; // دوران أبطأ وأكثر هدوءاً
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
 
-        // إنشاء الكرة الأرضية
+        // إنشاء الكرة
         const geometry = new THREE.SphereGeometry(2, 64, 64);
         const textureLoader = new THREE.TextureLoader();
-        // صورة أرض واقعية عالية الدقة
         const earthTexture = textureLoader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
         
         const material = new THREE.MeshStandardMaterial({
@@ -169,28 +174,34 @@
         });
 
         const earth = new THREE.Mesh(geometry, material);
+        
+        // --- توجيه الكرة نحو الشرق الأوسط (مكة) ---
+        // هذا الرقم (1.5) تقريبي لجعل منطقة الشرق الأوسط في الواجهة
+        earth.rotation.y = 1.5; 
+        
         scene.add(earth);
 
-        // إضافة الغلاف الجوي
+        // الغلاف الجوي
         const atmosphereGeometry = new THREE.SphereGeometry(2.05, 64, 64);
         const atmosphereMaterial = new THREE.MeshBasicMaterial({
-            color: 0x4a90e2,
+            color: 0xd4af37, // هالة باللون الذهبي
             transparent: true,
-            opacity: 0.15,
+            opacity: 0.1,
             side: THREE.BackSide
         });
         const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        atmosphere.rotation.y = 1.5; // نفس توجيه الكرة
         scene.add(atmosphere);
 
-        // الإضاءة
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        // الإضاءة (تعديل إضاءة الشمس لتعطي لوناً ذهبياً دافئاً)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
+        const directionalLight = new THREE.DirectionalLight(0xffd700, 2); // ضوء ذهبي
         directionalLight.position.set(5, 3, 5);
         scene.add(directionalLight);
 
-        // ضبط مكان الكرة (على اليمين في الكمبيوتر، وفي المنتصف بالأعلى في الجوال)
+        // موضع الكرة
         const updateGlobePosition = () => {
             if (window.innerWidth > 768) {
                 earth.position.x = 2.5;
@@ -206,30 +217,30 @@
         };
         updateGlobePosition();
 
-        // --- حركات GSAP ScrollTrigger ---
+        // --- حركات GSAP ---
         gsap.registerPlugin(ScrollTrigger);
 
-        // دوران الكرة مع التمرير للأسفل
+        // عند التمرير، تدور الكرة ببطء لتظهر باقي العالم
         gsap.to(earth.rotation, {
-            y: Math.PI * 2,
-            x: Math.PI / 4,
+            y: earth.rotation.y + Math.PI * 1.5, // تدور مسافة أكبر
+            x: Math.PI / 6,
             ease: "none",
             scrollTrigger: {
                 trigger: "body",
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 1.5
+                scrub: 2 // حركة ناعمة جداً
             }
         });
         gsap.to(atmosphere.rotation, {
-            y: Math.PI * 2,
-            x: Math.PI / 4,
+            y: atmosphere.rotation.y + Math.PI * 1.5,
+            x: Math.PI / 6,
             ease: "none",
             scrollTrigger: {
                 trigger: "body",
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 1.5
+                scrub: 2
             }
         });
 
@@ -241,7 +252,6 @@
         }
         animate();
 
-        // التجاوب مع حجم الشاشة
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
