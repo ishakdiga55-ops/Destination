@@ -3,175 +3,225 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وكالة السفر الفاخرة</title>
+    <title>Destination | السفر يعاد تعريفه</title>
     
-    <!-- تضمين Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Tajawal', 'sans-serif'],
-                    },
-                    colors: {
-                        'luxury-dark': '#0f172a',
-                        'luxury-gold': '#d4af37',
-                    }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- استدعاء خط عربي جميل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
     
-    <!-- تضمين مكتبات GSAP و ScrollTrigger و Lenis و Three.js -->
+    <!-- استدعاء مكتبة GSAP للحركات -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-</head>
-<body class="bg-luxury-dark text-white overflow-x-hidden">
 
-    <!-- حاوية المجسم ثلاثي الأبعاد (الكرة الأرضية) -->
-    <div id="globe-container" class="fixed top-0 left-0 w-full h-full pointer-events-none z-10 opacity-80"></div>
-
-    <!-- قسم البطل (Hero Section) -->
-    <section class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-black/70 z-0"></div>
-        <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=2074&auto=format&fit=crop" 
-             alt="طائرة في السماء" 
-             class="absolute inset-0 w-full h-full object-cover hero-bg -z-10">
-        
-        <div class="z-20 text-center px-4 hero-content mt-10">
-            <p class="text-luxury-gold tracking-widest mb-4 text-lg drop-shadow-md">السفر يعاد تعريفه</p>
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight drop-shadow-xl">باريس تبدأ<br>قبل أن تهبط.</h1>
-            <button class="px-8 py-3 mt-4 border border-white/50 rounded-full hover:bg-white hover:text-luxury-dark transition duration-300 backdrop-blur-sm pointer-events-auto shadow-lg">
-                اكتشف رحلتك
-            </button>
-        </div>
-    </section>
-
-    <!-- قسم الوجهات -->
-    <section class="py-24 px-6 md:px-20 bg-luxury-dark/80 backdrop-blur-sm relative z-20">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-bold mb-16 text-center section-title drop-shadow-md">وجهات حصرية</h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <div class="relative group overflow-hidden rounded-2xl destination-card h-96 cursor-pointer shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1572487045501-14022c4f4d22?q=80&w=1969&auto=format&fit=crop" alt="موريشيوس" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 p-8">
-                        <h3 class="text-3xl font-bold mb-2">موريشيوس</h3>
-                        <p class="text-gray-300">ملاذ استوائي يفوق الخيال</p>
-                    </div>
-                </div>
-
-                <div class="relative group overflow-hidden rounded-2xl destination-card h-96 cursor-pointer mt-0 md:mt-16 shadow-2xl">
-                    <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?q=80&w=2070&auto=format&fit=crop" alt="مصر" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                    <div class="absolute bottom-0 p-8">
-                        <h3 class="text-3xl font-bold mb-2">مصر</h3>
-                        <p class="text-gray-300">عظمة التاريخ والفخامة الحديثة</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- أكواد الجافاسكربت للحركات والتجسيم -->
-    <script>
-        // 1. إعداد التمرير السلس (Lenis)
-        const lenis = new Lenis({
-            duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-            smoothWheel: true
-        });
-
-        function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
+    <style>
+        /* إعدادات عامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        requestAnimationFrame(raf);
 
-        // 2. إعداد GSAP وربطه مع Lenis
-        gsap.registerPlugin(ScrollTrigger);
-        lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time) => { lenis.raf(time * 1000); });
-        gsap.ticker.lagSmoothing(0, 0);
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #0f172a; /* لون أزرق داكن جداً كخلفية احتياطية */
+            color: white;
+            overflow-x: hidden;
+        }
 
-        // حركات النصوص والصور (GSAP)
-        gsap.from(".hero-content > *", {
-            y: 50,
-            opacity: 0,
-            duration: 1.2,
-            stagger: 0.2,
-            ease: "power3.out",
-            delay: 0.5
-        });
+        /* قسم البداية (Hero Section) */
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
 
-        gsap.to(".hero-bg", {
-            yPercent: 30,
-            ease: "none",
-            scrollTrigger: {
-                trigger: "section",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
-            }
-        });
+        /* حاوية الكرة الأرضية 3D */
+        #globe-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* خلف النص */
+        }
 
-        gsap.from(".destination-card", {
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.3,
-            scrollTrigger: {
-                trigger: ".section-title",
-                start: "top 85%",
-                toggleActions: "play none none reverse"
-            }
-        });
+        /* النص فوق الكرة */
+        .hero-content {
+            position: relative;
+            z-index: 10; /* أمام الكرة */
+            text-align: center;
+            pointer-events: none; /* لكي يتمكن المستخدم من تدوير الكرة من خلف النص */
+            padding: 0 20px;
+        }
 
-        // 3. إعداد الكرة الأرضية الواقعية (Three.js)
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #facc15; /* لون ذهبي */
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem); /* حجم متجاوب مع الشاشة */
+            font-weight: 900;
+            line-height: 1.2;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8); /* ظل ليظهر النص فوق أي خلفية */
+        }
+
+        /* قسم الوجهات (الذي يظهر عند التمرير) */
+        .destinations-section {
+            position: relative;
+            z-index: 10;
+            background-color: #0f172a;
+            min-height: 100vh;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        /* قسم توضيحي للبطاقات */
+        .placeholder-text {
+            color: #94a3b8;
+            font-size: 1.2rem;
+        }
+
+        /* إخفاء شريط التمرير لمظهر أنيق */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+    </style>
+</head>
+<body>
+
+    <!-- 1. القسم الأول: الواجهة الرئيسية -->
+    <section class="hero-section">
+        <div id="globe-container"></div>
         
+        <div class="hero-content">
+            <div class="hero-subtitle">السفر يعاد تعريفه</div>
+            <h1 class="hero-title">باريس تبدأ<br>قبل أن تهبط.</h1>
+        </div>
+    </section>
+
+    <!-- 2. القسم الثاني: الوجهات الحصرية -->
+    <section class="destinations-section">
+        <h2 class="section-title">وجهات حصرية</h2>
+        <p class="placeholder-text">هنا سنقوم بإضافة بطاقات الوجهات السياحية قريباً...</p>
+    </section>
+
+    <!-- استدعاء Three.js (الحديث) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <!-- كود الكرة الأرضية 3D والحركات -->
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+        // --- إعدادات Three.js ---
+        const scene = new THREE.Scene();
+        // إضافة ضباب لدمج الكرة مع الخلفية
+        scene.fog = new THREE.FogExp2(0x0f172a, 0.02); 
+
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('globe-container').appendChild(renderer.domElement);
 
-        // إضافة إضاءة لتوضيح تضاريس الكرة الواقعية
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); // إضاءة محيطية
-        scene.add(ambientLight);
+        // التحكم بالكرة
+        const controls = new OrbitControls(camera, renderer.domElement);
+        controls.enableZoom = false;
+        controls.enablePan = false;
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+
+        // إنشاء الكرة الأرضية
+        const geometry = new THREE.SphereGeometry(2, 64, 64);
+        const textureLoader = new THREE.TextureLoader();
+        // صورة أرض واقعية عالية الدقة
+        const earthTexture = textureLoader.load('https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg');
         
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // إضاءة موجهة
+        const material = new THREE.MeshStandardMaterial({
+            map: earthTexture,
+            roughness: 0.8,
+            metalness: 0.1,
+        });
+
+        const earth = new THREE.Mesh(geometry, material);
+        scene.add(earth);
+
+        // إضافة الغلاف الجوي
+        const atmosphereGeometry = new THREE.SphereGeometry(2.05, 64, 64);
+        const atmosphereMaterial = new THREE.MeshBasicMaterial({
+            color: 0x4a90e2,
+            transparent: true,
+            opacity: 0.15,
+            side: THREE.BackSide
+        });
+        const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+        scene.add(atmosphere);
+
+        // الإضاءة
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 2.5);
         directionalLight.position.set(5, 3, 5);
         scene.add(directionalLight);
 
-        // تصغير الحجم إلى 1.6
-        const geometry = new THREE.SphereGeometry(1.6, 64, 64);
-        
-        // تحميل خريطة الأرض الواقعية
-        const textureLoader = new THREE.TextureLoader();
-        const earthTexture = textureLoader.load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg');
-        
-        const material = new THREE.MeshStandardMaterial({ 
-            map: earthTexture,
-            transparent: true,
-            opacity: 0.85 // شفافية خفيفة لتندمج مع الخلفية
+        // ضبط مكان الكرة (على اليمين في الكمبيوتر، وفي المنتصف بالأعلى في الجوال)
+        const updateGlobePosition = () => {
+            if (window.innerWidth > 768) {
+                earth.position.x = 2.5;
+                atmosphere.position.x = 2.5;
+                camera.position.z = 8;
+            } else {
+                earth.position.x = 0;
+                earth.position.y = 0.5;
+                atmosphere.position.x = 0;
+                atmosphere.position.y = 0.5;
+                camera.position.z = 7;
+            }
+        };
+        updateGlobePosition();
+
+        // --- حركات GSAP ScrollTrigger ---
+        gsap.registerPlugin(ScrollTrigger);
+
+        // دوران الكرة مع التمرير للأسفل
+        gsap.to(earth.rotation, {
+            y: Math.PI * 2,
+            x: Math.PI / 4,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1.5
+            }
         });
-        
-        const globe = new THREE.Mesh(geometry, material);
-        scene.add(globe);
-
-        camera.position.z = 5;
-        
-        // إزاحة وتنزيل المجسم قليلاً للأسفل لكي لا يغطي العنوان
-        globe.position.y = -0.5;
-        globe.position.x = window.innerWidth > 768 ? 1.5 : 0; 
-
-        // ربط دوران الكرة بالتمرير
-        gsap.to(globe.rotation, {
+        gsap.to(atmosphere.rotation, {
             y: Math.PI * 2,
             x: Math.PI / 4,
             ease: "none",
@@ -183,20 +233,20 @@
             }
         });
 
-        // تشغيل المشهد 3D
-        function animate3D() {
-            requestAnimationFrame(animate3D);
-            globe.rotation.y += 0.001; // دوران ذاتي بطيء
+        // --- حلقة الرسم ---
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
             renderer.render(scene, camera);
         }
-        animate3D();
+        animate();
 
-        // تجاوب المجسم مع تغير حجم الشاشة
+        // التجاوب مع حجم الشاشة
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            globe.position.x = window.innerWidth > 768 ? 1.5 : 0;
+            updateGlobePosition();
         });
     </script>
 </body>
