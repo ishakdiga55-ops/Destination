@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>وكالة الحج والعمرة |.en ضيوف الرحمن</title>
+    <title>وكالة الحج والعمرة | ضيوف الرحمن</title>
     
-able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "أميري" أو " falseتجوال") -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     
-    <!-- استدعاء مكتبة GSAP للحركات -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <style>
-        /* إعدادات عامة */
         * {
             margin: 0;
             padding: 0;
@@ -22,13 +19,11 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
 
         body {
             font-family: 'Tajawal', sans-serif;
-            /* لون خلفية أخضر داكن جداً يبعث على الطمأنينة (بدلاً من الأزرق) */
             background-color: #06120e; 
             color: white;
             overflow-x: hidden;
         }
 
-        /* قسم البداية (Hero Section) */
         .hero-section {
             position: relative;
             height: 100vh;
@@ -49,22 +44,41 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
             z-index: 1;
         }
 
-        /* النص فوق الكرة */
+        /* تصميم الطائرة */
+        .airplane-container {
+            position: absolute;
+            z-index: 5;
+            /* نضعها مبدئياً فوق الجزائر تقريباً (في المنتصف) */
+            top: 55%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            pointer-events: none;
+            /* تدوير الطائرة لتبدو متجهة نحو الشرق */
+            transform: translate(-50%, -50%) rotate(-45deg); 
+        }
+
+        .airplane-container img {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 15px rgba(212, 175, 55, 0.8)); /* توهج ذهبي للطائرة */
+        }
+
         .hero-content {
             position: relative;
             z-index: 10;
             text-align: center;
             pointer-events: none;
             padding: 0 20px;
-            background: radial-gradient(circle, rgba(6,18,14,0.7) 0%, rgba(6,18,14,0) 70%); /* تعتيم خلف النص لبروزه */
+            background: radial-gradient(circle, rgba(6,18,14,0.7) 0%, rgba(6,18,14,0) 70%);
+            margin-top: 50px; /* إنزال النص قليلاً ليتناسب مع الحجم الجديد */
         }
 
         .hero-subtitle {
             font-size: 1.4rem;
-            color: #d4af37; /* لون ذهبي فخم */
+            color: #d4af37;
             margin-bottom: 20px;
-            letter-spacing: 2px;
-            font-family: 'Amiri', serif; /* خط عربي كلاسيكي للنصوص الدينية */
+            font-family: 'Amiri', serif;
         }
 
         .hero-title {
@@ -75,10 +89,9 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
         }
         
         .hero-title span {
-            color: #d4af37; /* تمييز كلمة أو جملة بالذهبي */
+            color: #d4af37;
         }
 
-        /* قسم الباقات (الذي يظهر عند التمرير) */
         .packages-section {
             position: relative;
             z-index: 10;
@@ -86,7 +99,7 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
             min-height: 100vh;
             padding: 80px 20px;
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2); /* خط ذهبي خفيف */
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .section-title {
@@ -96,13 +109,6 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
             color: #d4af37;
         }
 
-        .section-subtitle {
-            color: #94a3b8;
-            font-size: 1.2rem;
-            margin-bottom: 50px;
-        }
-
-        /* إخفاء شريط التمرير */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #06120e; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 4px; }
@@ -110,24 +116,25 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
 </head>
 <body>
 
-    <!-- 1. القسم الأول: الواجهة الرئيسية -->
     <section class="hero-section">
         <div id="globe-container"></div>
         
+        <!-- إضافة الطائرة (استخدمت أيقونة SVG مجانية) -->
+        <div class="airplane-container" id="airplane">
+            <img src="https://cdn-icons-png.flaticon.com/512/7893/7893979.png" alt="طائرة">
+        </div>
+
         <div class="hero-content">
             <div class="hero-subtitle">بكل طمأنينة وراحة بال</div>
             <h1 class="hero-title">لبيك اللهم لبيك<br><span>ضيوف الرحمن</span></h1>
         </div>
     </section>
 
-    <!-- 2. القسم الثاني: باقات العمرة والحج -->
     <section class="packages-section">
         <h2 class="section-title">رحلتك الإيمانية تبدأ هنا</h2>
-        <p class="section-subtitle">اكتشف باقاتنا الحصرية للحج والعمرة المصممة لراحتك</p>
-        <!-- سيتم إضافة بطاقات الباقات هنا لاحقاً -->
+        <p style="color: #94a3b8; font-size: 1.2rem;">اكتشف باقاتنا الحصرية للحج والعمرة المصممة لراحتك</p>
     </section>
 
-    <!-- استدعاء Three.js -->
     <script type="importmap">
     {
         "imports": {
@@ -137,14 +144,12 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
     }
     </script>
 
-    <!-- كود الكرة الأرضية 3D والحركات -->
     <script type="module">
         import * as THREE from 'three';
         import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
         // --- إعدادات Three.js ---
         const scene = new THREE.Scene();
-        // ضباب بلون الخلفية الجديدة (الأخضر الداكن)
         scene.fog = new THREE.FogExp2(0x06120e, 0.02); 
 
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -153,12 +158,11 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         document.getElementById('globe-container').appendChild(renderer.domElement);
 
-        // التحكم
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableZoom = false;
-        controls;
+        controls.enablePan = false;
         controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.3; // دوران أبطأ وأكثر هدوءاً
+        controls.autoRotateSpeed = 0.3; 
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
 
@@ -175,44 +179,43 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
 
         const earth = new THREE.Mesh(geometry, material);
         
-        // --- توجيه الكرة نحو الشرق الأوسط (مكة) ---
-        // هذا الرقم (1.5) تقريبي لجعل منطقة الشرق الأوسط في الواجهة
-        earth.rotation.y = 1.5; 
+        // --- توجيه الكرة نحو الجزائر (شمال أفريقيا) ---
+        // الرقم 1.57 (تقريباً باي/2) يجعل قارة أفريقيا في المنتصف
+        earth.rotation.y = 1.57; 
         
         scene.add(earth);
 
-        // الغلاف الجوي
         const atmosphereGeometry = new THREE.SphereGeometry(2.05, 64, 64);
         const atmosphereMaterial = new THREE.MeshBasicMaterial({
-            color: 0xd4af37, // هالة باللون الذهبي
+            color: 0xd4af37,
             transparent: true,
             opacity: 0.1,
             side: THREE.BackSide
         });
         const atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
-        atmosphere.rotation.y = 1.5; // نفس توجيه الكرة
+        atmosphere.rotation.y = 1.57;
         scene.add(atmosphere);
 
-        // الإضاءة (تعديل إضاءة الشمس لتعطي لوناً ذهبياً دافئاً)
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        // الإضاءة
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffd700, 2); // ضوء ذهبي
+        const directionalLight = new THREE.DirectionalLight(0xffd700, 2);
         directionalLight.position.set(5, 3, 5);
         scene.add(directionalLight);
 
-        // موضع الكرة
+        // --- تصغير الكرة الأرضية ---
         const updateGlobePosition = () => {
             if (window.innerWidth > 768) {
                 earth.position.x = 2.5;
                 atmosphere.position.x = 2.5;
-                camera.position.z = 8;
+                camera.position.z = 10; // تم زيادة الرقم لتبدو الكرة أصغر
             } else {
                 earth.position.x = 0;
-                earth.position.y = 0.5;
+                earth.position.y = 0.2;
                 atmosphere.position.x = 0;
-                atmosphere.position.y = 0.5;
-                camera.position.z = 7;
+                atmosphere.position.y = 0.2;
+                camera.position.z = 9; // تصغير الكرة في الجوال
             }
         };
         updateGlobePosition();
@@ -220,16 +223,16 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
         // --- حركات GSAP ---
         gsap.registerPlugin(ScrollTrigger);
 
-        // عند التمرير، تدور الكرة ببطء لتظهر باقي العالم
+        // 1. حركة الكرة الأرضية عند التمرير
         gsap.to(earth.rotation, {
-            y: earth.rotation.y + Math.PI * 1.5, // تدور مسافة أكبر
+            y: earth.rotation.y + Math.PI * 1.5, 
             x: Math.PI / 6,
             ease: "none",
             scrollTrigger: {
                 trigger: "body",
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 2 // حركة ناعمة جداً
+                scrub: 2 
             }
         });
         gsap.to(atmosphere.rotation, {
@@ -241,6 +244,22 @@ able    <!-- استدعاءPan خط عربي جميل وفخم (م =ثل خط "�
                 start: "top top",
                 end: "bottom bottom",
                 scrub: 2
+            }
+        });
+
+        // 2. حركة الطائرة (تطير من الجزائر نحو مكة عند التمرير)
+        gsap.to("#airplane", {
+            top: "10%",           // ترتفع للأعلى
+            left: "85%",          // تتجه لليمين (ناحية الشرق حيث مكة)
+            scale: 2.5,           // تكبر وكأنها تقترب من المشاهد
+            rotation: 20,         // تغير زاوية ميلانها
+            opacity: 0,           // تختفي تدريجياً وكأنها دخلت السحاب
+            ease: "power2.inOut",
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "50% top",   // تنتهي الحركة عند منتصف التمرير
+                scrub: 1.5
             }
         });
 
