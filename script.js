@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. الأمر السحري: إجبار جميع الهواتف على التمركز في المنتصف بالقوة
+// 1. توسيط جميع الهواتف في المنتصف
 gsap.set(".phone", { 
     left: "50%", 
     top: "50%", 
@@ -17,8 +17,12 @@ gsap.from(".cta-button", { x: 50, opacity: 0, duration: 1, delay: 0.8 });
 
 let mm = gsap.matchMedia();
 
-// 🖥️ حركة الكمبيوتر (ف تخرج من اليسار وتدخل من اليمين)
+// 🖥️ حركة الكمبيوتر (تأثير العمق 3D)
 mm.add("(min-width: 769px)", () => {
+    
+    // إعداد الهواتف المخفية (تكون في الخلف وصغيرة)
+    gsap.set(".phone-2, .phone-3, .phone-4, .phone-5", { z: -500, opacity: 0, scale: 0.6 });
+
     let tl = gsap.timeline({
         scrollTrigger: {
             trigger: ".scroll-container",
@@ -29,24 +33,23 @@ mm.add("(min-width: 769px)", () => {
         }
     });
 
-    // إخفاء الهواتف 2 إلى 5 مبدئياً
-    gsap.set(".phone-2, .phone-3, .phone-4, .phone-5", { xPercent: 150, opacity: 0, scale: 0.8 });
-
-    tl.to(".phone-1", { xPercent: -150, opacity: 0, scale: 0.8, rotationY: -20 })
-      .to(".phone-2", { xPercent: -50, opacity: 1, scale: 1, rotationY: 0 }, "<")
-      .to(".phone-2", { xPercent: -150, opacity: 0, scale: 0.8, rotationY: -20 })
-      .to(".phone-3", { xPercent: -50, opacity: 1, scale: 1, rotationY: 0 }, "<")
-      .to(".phone-3", { xPercent: -150, opacity: 0, scale: 0.8, rotationY: -20 })
-      .to(".phone-4", { xPercent: -50, opacity: 1, scale: 1, rotationY: 0 }, "<")
-      .to(".phone-4", { xPercent: -150, opacity: 0, scale: 0.8, rotationY: -20 })
-      .to(".phone-5", { xPercent: -50, opacity: 1, scale: 1, rotationY: 0 }, "<");
+    // الهاتف الأول يبتعد للخلف، والثاني يقترب للأمام
+    tl.to(".phone-1", { z: 300, opacity: 0, scale: 1.2, rotationY: 15 })
+      .to(".phone-2", { z: 0, opacity: 1, scale: 1 }, "<")
+      .to(".phone-2", { z: 300, opacity: 0, scale: 1.2, rotationY: 15 })
+      .to(".phone-3", { z: 0, opacity: 1, scale: 1 }, "<")
+      .to(".phone-3", { z: 300, opacity: 0, scale: 1.2, rotationY: 15 })
+      .to(".phone-4", { z: 0, opacity: 1, scale: 1 }, "<")
+      .to(".phone-4", { z: 300, opacity: 0, scale: 1.2, rotationY: 15 })
+      .to(".phone-5", { z: 0, opacity: 1, scale: 1 }, "<");
 });
 
-// 📱 حركة الجوال (الهواتف تظهر وتختفي في المنتصف بدون أن تتحرك يميناً أو يساراً)
+// 📱 حركة الجوال (تأثير الخروج من الهاتف)
 mm.add("(max-width: 768px)", () => {
     
-    // إخفاء الهواتف 2 إلى 5 مبدئياً (بدون تحريكهم لليمين)
-    gsap.set(".phone-2, .phone-3, .phone-4, .phone-5", { opacity: 0, scale: 0.8 });
+    // إعداد الهواتف المخفية (تكون في الخلف وصغيرة جداً)
+    gsap.set(".phone-2, .phone-3, .phone-4, .phone-5", { scale: 0.4, opacity: 0, y: 50 });
+    gsap.set(".phone-1", { zIndex: 10 }); // الأول في المقدمة
 
     let mobileTl = gsap.timeline({
         scrollTrigger: {
@@ -58,13 +61,16 @@ mm.add("(max-width: 768px)", () => {
         }
     });
 
-    // التحكم فقط بالشفافية والحجم (الـ xPercent يبقى -50 ليظل في المنتصف)
-    mobileTl.to(".phone-1", { opacity: 0, scale: 0.8 })
-            .to(".phone-2", { opacity: 1, scale: 1 }, "<")
-            .to(".phone-2", { opacity: 0, scale: 0.8 })
-            .to(".phone-3", { opacity: 1, scale: 1 }, "<")
-            .to(".phone-3", { opacity: 0, scale: 0.8 })
-            .to(".phone-4", { opacity: 1, scale: 1 }, "<")
-            .to(".phone-4", { opacity: 0, scale: 0.8 })
-            .to(".phone-5", { opacity: 1, scale: 1 }, "<");
+    // الهاتف الأول ينزل للأسفل ويختفي، والثاني يكبر ويصعد للمنتصف
+    mobileTl.to(".phone-1", { y: 150, opacity: 0, scale: 0.8, zIndex: 0 })
+            .to(".phone-2", { scale: 1, opacity: 1, y: 0, zIndex: 10 }, "<")
+            
+            .to(".phone-2", { y: 150, opacity: 0, scale: 0.8, zIndex: 0 })
+            .to(".phone-3", { scale: 1, opacity: 1, y: 0, zIndex: 10 }, "<")
+            
+            .to(".phone-3", { y: 150, opacity: 0, scale: 0.8, zIndex: 0 })
+            .to(".phone-4", { scale: 1, opacity: 1, y: 0, zIndex: 10 }, "<")
+            
+            .to(".phone-4", { y: 150, opacity: 0, scale: 0.8, zIndex: 0 })
+            .to(".phone-5", { scale: 1, opacity: 1, y: 0, zIndex: 10 }, "<");
 });
