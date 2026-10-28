@@ -1,5 +1,5 @@
 :root { 
-    --bg-dark: #000000; /* أسود نقي 100% لدمج الصور */
+    --bg-dark: #000000; /* أسود نقي جداً */
     --neon-green: #ccff00; 
     --text-white: #ffffff; 
     --text-gray: #888888; 
@@ -30,7 +30,7 @@ nav {
 .nav-links a { color: var(--text-white); text-decoration: none; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; transition: color 0.3s; }
 .nav-links a:hover { color: var(--neon-green); }
 
-/* تقليل مسافة التمرير لتجنب الفراغ */
+/* التمرير */
 .scroll-container { position: relative; height: 400vh; } 
 .hero { 
     position: sticky; 
@@ -44,7 +44,13 @@ nav {
     overflow: hidden;
 }
 
-.hero-content { flex: 1; z-index: 10; padding-left: 50px; }
+/* النصوص - رفعنا الـ z-index ليكون فوق الصور */
+.hero-content { 
+    flex: 1; 
+    z-index: 100; /* مهم جداً لكي لا تختفي النصوص */
+    padding-left: 50px; 
+    position: relative;
+}
 .hero-top-text { font-size: 0.8rem; color: var(--text-gray); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
 .hero-title { font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
 .hero-title span { color: var(--neon-green); font-weight: 900; display: block; text-shadow: 0 0 20px rgba(204, 255, 0, 0.3); }
@@ -53,39 +59,54 @@ nav {
 .cta-button { background: var(--neon-green); border: none; color: var(--bg-dark); padding: 15px 40px; font-size: 0.9rem; font-family: 'Cairo', sans-serif; font-weight: 900; border-radius: 3px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(204, 255, 0, 0.2); }
 .cta-button:hover { box-shadow: 0 0 40px rgba(204, 255, 0, 0.6); transform: translateY(-3px); }
 
-.hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; height: 100%; perspective: 1500px; }
+/* الصور */
+.hero-visual { 
+    flex: 1; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    position: relative; 
+    height: 100%; 
+    z-index: 10;
+}
 
-.glow-effect { position: absolute; width: 500px; height: 500px; background: var(--neon-green); filter: blur(150px); opacity: 0.15; z-index: 1; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.glow-effect { 
+    position: absolute; 
+    width: 500px; 
+    height: 500px; 
+    background: var(--neon-green); 
+    filter: blur(150px); 
+    opacity: 0.15; 
+    z-index: 1; 
+    border-radius: 50%; 
+    left: 50%; 
+    top: 50%; 
+    transform: translate(-50%, -50%); 
+}
 
-.phone-container { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 2; transform-style: preserve-3d; }
+.phone-container { 
+    position: relative; 
+    width: 100%; 
+    height: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    z-index: 2; 
+}
 
 .phone { 
     position: absolute; 
     max-height: 75vh; 
     width: auto; 
     object-fit: contain; 
-    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.9)) contrast(1.2) brightness(1.1); /* فلتر يخفي حواف الصورة */
-    mix-blend-mode: screen;
+    /* إزالة mix-blend-mode الذي سبب المشكلة */
 }
 
-/* تنسيقات قسم النهاية (الفوتر) */
-.footer {
-    position: relative;
-    z-index: 20;
-    background-color: #050505;
-    padding: 100px 20px 40px 20px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-.footer h2 { font-size: 2.5rem; margin-bottom: 15px; color: var(--text-white); }
-.footer p { color: var(--text-gray); margin-bottom: 30px; font-size: 1.1rem; }
-.footer-bottom { margin-top: 80px; border-top: 1px solid: rgba(255,255,255, 0.05); padding-top: 120px; color: var(--text,-gray); font-size: 0.8rem;}
-
-@media ( delaymax-width: 768px) {
-    nav: { padding: 15px 20px; }
+@media (max-width: 768px) {
+    nav { padding: 15px 20px; }
     .nav-links { display: none; }
     
-    .scroll-container { height: 350vh; } /* مسافة أقصر للجوال */
+    .scroll-container { height: 350vh; } 
     .hero { 
         flex-direction: column; 
         padding: 100px 20px 20px 20px; 
@@ -93,13 +114,33 @@ nav {
         justify-content: flex-start;
     }
     
-    .hero-content { padding-left: 0; margin-bottom: 10px; }
+    .hero-content { 
+        padding-left: 0; 
+        margin-bottom: 10px; 
+        z-index: 100;
+    }
     .hero-title { font-size: 2.2rem; } 
     .hero-subtitle { margin: 0 auto 15px auto; font-size: 0.85rem; }
     
-    .hero-visual { height: 55vh; width: 100%; } 
-    .phone { max-height: 45vh; max-width: 85vw; }
-    .glow-effect { width: 250px; height: 250px; filter: blur(80px); }
+    .hero-visual { 
+        height: 55vh; 
+        width: 100%; 
+    } 
     
-    .footer h2 { font-size: 1.8rem; }
+    .phone { 
+        max-height: 45vh; 
+        max-width: 85vw;
+    }
+
+    .glow-effect { 
+        width: 250px; 
+        height: 250px; 
+        filter: blur(80px); 
+    }
 }
+
+/* الفوتر */
+.footer { position: relative; z-index: 20; background-color: #050505; padding: 100px 20px 40px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer h2 { font-size: 2.5rem; margin-bottom: 15px; color: var(--text-white); }
+.footer p { color: var(--text-gray); margin-bottom: 30px; font-size: 1.1rem; }
+.footer-bottom { margin-top: 80px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; color: var(--text-gray); font-size: 0.8rem;}
