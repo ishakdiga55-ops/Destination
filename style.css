@@ -33,12 +33,12 @@ nav {
 .nav-links a:hover { color: var(--neon-green); }
 
 /* حاوية التمرير */
-.scroll-container { position: relative; height: 500vh; } /* مسافة كافية لمرور 5 هواتف */
+.scroll-container { position: relative; height: 500vh; } 
 .hero { 
     position: sticky; 
     top: 0; 
     height: 100vh; 
-    height: 100dvh; /* دعم متصفحات الآيفون */
+    height: 100dvh; 
     display: flex; 
     align-items: center; 
     z-index: 10; 
@@ -70,11 +70,11 @@ nav {
     mix-blend-mode: screen; 
 }
 
-/* إخفاء الهواتف 2 إلى 5 في البداية */
+/* إخفاء الهواتف 2 إلى 5 في البداية (للحركة على الكمبيوتر) */
 .phone-2, .phone-3, .phone-4, .phone-5 { opacity: 0; transform: translateX(100%) scale(0.8); }
 
 /* ========================================= */
-/* --- إعدادات الجوال (توسيط الهواتف) --- */
+/* --- إصلاحات الجوال الجذرية --- */
 /* ========================================= */
 @media (max-width: 768px) {
     nav { padding: 15px 20px; }
@@ -82,17 +82,17 @@ nav {
     
     .hero { 
         flex-direction: column; 
-        padding: 90px 20px 40px 20px; 
+        padding: 100px 20px 20px 20px; /* مسافة كافية لشريط التنقل */
         text-align: center; 
         justify-content: flex-start;
     }
     
-    .hero-content { padding-left: 0; margin-bottom: 20px; }
-    .hero-title { font-size: 2.5rem; }
-    .hero-subtitle { margin: 0 auto 20px auto; font-size: 0.9rem; }
+    .hero-content { padding-left: 0; margin-bottom: 10px; }
+    .hero-title { font-size: 2.2rem; } /* تصغير الخط قليلاً ليتناسب */
+    .hero-subtitle { margin: 0 auto 15px auto; font-size: 0.85rem; }
     
     .hero-visual { 
-        height: 50vh; 
+        height: 55vh; 
         width: 100%; 
     } 
     
@@ -105,5 +105,18 @@ nav {
         transform: translate(-50%, -50%);
     }
 
-    .glow-effect { width: 250px; height: 250px; filter: blur(80px); left: 50%; transform: translateX(-50%); top: 50%; }
+    /* إلغاء الإزاحة في الجوال لكي تظهر الهواتف فوق بعضها في المنتصف */
+    .phone-2, .phone-3, .phone-4, .phone-5 { 
+        opacity: 0; 
+        transform: translate(-50%, -50%) scale(0.8); 
+    }
+
+    .glow-effect { 
+        width: 250px; 
+        height: 250px; 
+        filter: blur(80px); 
+        left: 50%; 
+        transform: translateX(-50%); 
+        top: 50%; 
+    }
 }
