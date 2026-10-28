@@ -3,353 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الهواتف الذكية | TECH STORE</title>
-    
-    <!-- خط عربي حديث -->
+    <title>متجر الهواتف الذكية | TECH ZONE</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
-    
-    <!-- مكتبة GSAP للحركات -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
     <style>
-        :root {
-            /* ألوان مستوحاة من إعلان الكيبورد (تكنولوجيا وفخامة) */
-            --bg-dark: #09090b;       /* أسود عميق */
-            --bg-lighter: #18181b;    /* رمادي داكن */
-            --neon-green: #ccff00;    /* أخضر نيون (مستوحى من الصور) */
-            --text-white: #ffffff;
-            --text-gray: #a1a1aa;
+        :root { 
+            --bg-dark: #050505; 
+            --neon-green: #ccff00; 
+            --text-white: #ffffff; 
+            --text-gray: #a1a1aa; 
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            overflow-x: hidden;
-            /* تدرج خفيف يعطي عمقاً للخلفية */
-            background-image: radial-gradient(circle at 50% 0%, var(--bg-lighter) 0%, var(--bg-dark) 70%);
+            font-family: 'Cairo', sans-serif; background-color: var(--bg-dark); color: var(--text-white);
+            overflow-x: hidden; background-image: radial-gradient(circle at 50% 50%, #111 0%, #050505 100%);
         }
-
-        /* شبكة خفيفة في الخلفية لتعطي طابعاً تقنياً */
+        
         .grid-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            z-index: 0;
-            pointer-events: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px; z-index: 0; pointer-events: none;
         }
 
-        /* --- شريط التنقل --- */
-        nav {
-            position: fixed;
-            top: 0; width: 100%;
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: linear-gradient(to bottom, rgba(9,9,11,0.9), transparent);
+        nav { position: fixed; top: 0; width: 100%; padding: 30px 60px; display: flex; justify-content: space-between; align-items: center; z-index: 100; background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent); }
+        .logo { font-size: 1.5rem; font-weight: 900; color: var(--neon-green); letter-spacing: 2px; }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { color: var(--text-white); text-decoration: none; font-size: 0.9rem; font-weight: 500; text-transform: uppercase; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--neon-green); }
+
+        .hero { position: relative; height: 100vh; display: flex; align-items: center; z-index: 10; padding: 0 100px; }
+        
+        .hero-content { flex: 1; z-index: 10; padding-left: 50px; }
+        .hero-top-text { font-size: 0.8rem; color: var(--text-gray); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
+        .hero-title { font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
+        .hero-title span { color: var(--neon-green); font-weight: 900; display: block; text-shadow: 0 0 20px rgba(204, 255, 0, 0.3); }
+        .hero-subtitle { font-size: 1.1rem; color: var(--text-gray); max-width: 450px; line-height: 1.8; margin-bottom: 40px; }
+        
+        .cta-button { background: var(--neon-green); border: none; color: var(--bg-dark); padding: 15px 40px; font-size: 1rem; font-family: 'Cairo', sans-serif; font-weight: 700; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(204, 255, 0, 0.2); }
+        .cta-button:hover { box-shadow: 0 0 40px rgba(204, 255, 0, 0.6); transform: translateY(-3px); }
+
+        .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; height: 100%; perspective: 1000px; }
+        
+        .glow-effect { position: absolute; width: 350px; height: 350px; background: var(--neon-green); filter: blur(130px); opacity: 0.25; z-index: 1; border-radius: 50%; }
+        
+        .hero-image { 
+            position: relative; z-index: 2; 
+            max-height: 75vh; width: auto; object-fit: contain; 
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.9)); 
+            animation: float 6s ease-in-out infinite; 
+            transform: rotateY(-25deg) rotateX(10deg) rotateZ(5deg);
+            min-width: 200px; 
+            min-height: 300px;
+        }
+        
+        @keyframes float { 
+            0% { transform: translateY(0px) rotateY(-25deg) rotateX(10deg) rotateZ(5deg); } 
+            50% { transform: translateY(-20px) rotateY(-20deg) rotateX(5deg) rotateZ(2deg); } 
+            100% { transform: translateY(0px) rotateY(-25deg) rotateX(10deg) rotateZ(5deg); } 
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--neon-green);
-            letter-spacing: 2px;
-        }
+        .products { position: relative; z-index: 10; padding: 100px 50px; background-color: var(--bg-dark); border-top: 1px solid rgba(255,255,255,0.05); }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .section-header p { color: var(--neon-green); letter-spacing: 2px; font-size: 0.9rem; }
 
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-white);
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: var(--neon-green);
-        }
-
-        /* --- قسم الواجهة الرئيسية (Hero) --- */
-        .hero {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .hero-top-text {
-            font-size: 0.8rem;
-            color: var(--text-gray);
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .hero-top-text::before, .hero-top-text::after {
-            content: "";
-            width: 30px;
-            height: 1px;
-            background-color: var(--text-gray);
-        }
-
-        .hero-title {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .hero-title span {
-            /* تأثير النص المتدرج باللون النيون */
-            color: var(--neon-green);
-            display: block;
-            text-shadow: 0 0 20px rgba(204, 255, 0, 0.3);
-        }
-
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--text-gray);
-            max-width: 600px;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        /* زر التسوق */
-        .cta-button {
-            background: var(--neon-green);
-            border: none;
-            color: var(--bg-dark);
-            padding: 15px 40px;
-            font-size: 1rem;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 700;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 40px rgba(204, 255, 0, 0.6);
-        }
-
-        /* تأثير العنصر البصري المركزي (توهج خلفي) */
-        .hero-visual-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: var(--neon-green);
-            filter: blur(150px);
-            opacity: 0.15;
-            z-index: -1;
-            border-radius: 50%;
-        }
-
-        /* --- قسم المنتجات (الأسفل) --- */
-        .products {
-            padding: 100px 50px;
-            background-color: var(--bg-dark);
-            position: relative;
-            z-index: 10;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .section-header p {
-            color: var(--neon-green);
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-        }
-
-        /* شبكة المنتجات */
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        /* بطاقة المنتج (بأسلوب Glassmorphism) */
-        .product-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .product-card:hover {
-            border-color: var(--neon-green);
-            box-shadow: 0 10px 30px rgba(204, 255, 0, 0.1);
-            transform: translateY(-5px);
-        }
-
-        .product-image {
-            width: 100%;
-            height: 200px;
-            background-color: var(--bg-lighter);
-            border-radius: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-gray);
-        }
-
-        .product-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-
-        .product-price {
-            color: var(--neon-green);
-            font-size: 1.5rem;
-            font-weight: 900;
-            margin-bottom: 15px;
-        }
-
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .product-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px; padding: 20px; text-align: center; transition: all 0.4s ease; }
+        .product-card:hover { border-color: var(--neon-green); box-shadow: 0 10px 30px rgba(204, 255, 0, 0.1); transform: translateY(-5px); }
+        .product-image { width: 100%; height: 200px; background-color: #1a1a1a; border-radius: 10px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: var(--text-gray); }
+        .product-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .product-price { color: var(--neon-green); font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; }
+        
         @media (max-width: 768px) {
             nav { padding: 20px; }
             .nav-links { display: none; }
+            .hero { flex-direction: column; padding: 120px 20px 40px 20px; height: auto; text-align: center; }
+            .hero-content { padding-left: 0; }
+            .hero-subtitle { margin: 0 auto 30px auto; }
+            .hero-visual { margin-top: 40px; height: 50vh; min-height: 400px; } 
+            .hero-image { max-height: 100%; transform: none; animation: float-mobile 6s ease-in-out infinite; }
+            @keyframes float-mobile { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
             .products { padding: 50px 20px; }
         }
     </style>
 </head>
 <body>
-
-    <!-- شبكة الخلفية -->
     <div class="grid-overlay"></div>
-
-    <!-- شريط التنقل -->
     <nav>
         <div class="logo">TECH ZONE</div>
         <div class="nav-links">
-            <a href="#">الرئيسية</a>
-            <a href="#">الهواتف الذكية</a>
-            <a href="#">الإكسسوارات</a>
-            <a href="#">اتصل بنا</a>
+            <a href="#">الرئيسية</a> <a href="#">الهواتف</a> <a href="#">الإكسسوارات</a> <a href="#">اتصل بنا</a>
         </div>
-        <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem;">تسوق الآن</button>
     </nav>
 
-    <!-- القسم الرئيسي -->
     <section class="hero">
-        <!-- التوهج الخلفي -->
-        <div class="hero-visual-glow"></div>
-
-        <!-- المحتوى النصي -->
-        <div class="hero-top-text">NEXT GENERATION TECH</div>
-        <h1 class="hero-title">
-            اكتشف المستقبل
-            <span>بين يديك</span>
-        </h1>
-        <p class="hero-subtitle">أحدث الهواتف الذكية والأجهزة اللوحية بأفضل الأسعار. تكنولوجيا متطورة، تصميم أنيق، وأداء لا يعرف الحدود.</p>
-        
-        <button class="cta-button">استكشف الأجهزة</button>
+        <div class="hero-content">
+            <div class="hero-top-text">NEXT GENERATION TECH</div>
+            <h1 class="hero-title">اكتشف المستقبل<br><span>بين يديك</span></h1>
+            <p class="hero-subtitle">أحدث الهواتف الذكية والأجهزة اللوحية بأفضل الأسعار. تكنولوجيا متطورة، تصميم أنيق، وأداء لا يعرف الحدود.</p>
+            <button class="cta-button">استكشف الأجهزة</button>
+        </div>
+        <div class="hero-visual">
+            <div class="glow-effect"></div>
+            <!-- رابط مباشر ومستقر من GitHub، لن يُحظر أبداً -->
+            <img src="https://raw.githubusercontent.com/jonnyjackson26/device-frames-media/main/device-frames-output/Android%20Phone/Pixel%208%20Pro/Black/frame.png" alt="Smartphone" class="hero-image">
+        </div>
     </section>
 
-    <!-- قسم المنتجات (يظهر عند التمرير) -->
     <section class="products">
         <div class="section-header">
             <h2>أحدث الإصدارات</h2>
             <p>FEATURED PRODUCTS</p>
         </div>
-        
-        <!-- شبكة المنتجات -->
         <div class="product-grid">
-            <!-- بطاقة 1 -->
             <div class="product-card">
                 <div class="product-image">صورة الهاتف 1</div>
                 <h3>iPhone 15 Pro Max</h3>
                 <div class="product-price">$1,199</div>
-                <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">أضف للسلة</button>
+                <button class="cta-button" style="padding: 10px; width: 100%;">أضف للسلة</button>
             </div>
-            
-            <!-- بطاقة 2 -->
             <div class="product-card">
                 <div class="product-image">صورة الهاتف 2</div>
-                <h3>Samsung Galaxy S24 Ultra</h3>
+                <h3>Samsung S24 Ultra</h3>
                 <div class="product-price">$1,299</div>
-                <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">أضف للسلة</button>
+                <button class="cta-button" style="padding: 10px; width: 100%;">أضف للسلة</button>
             </div>
-
-            <!-- بطاقة 3 -->
             <div class="product-card">
                 <div class="product-image">صورة الهاتف 3</div>
                 <h3>Google Pixel 8 Pro</h3>
                 <div class="product-price">$999</div>
-                <button class="cta-button" style="padding: 10px 20px; font-size: 0.9rem; width: 100%;">أضف للسلة</button>
+                <button class="cta-button" style="padding: 10px; width: 100%;">أضف للسلة</button>
             </div>
         </div>
     </section>
 
     <script>
-        // تسجيل ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
-
-        // حركة ظهور العناصر عند تحميل الصفحة
         gsap.from(".hero-top-text", { y: -20, opacity: 0, duration: 1, delay: 0.2 });
-        gsap.from(".hero-title", { y: 30, opacity: 0, duration: 1, delay: 0.4 });
-        gsap.from(".hero-subtitle", { y: 30, opacity: 0, duration: 1, delay: 0.6 });
-        gsap.from(".cta-button", { y: 20, opacity: 0, duration: 1, delay: 0.8 });
+        gsap.from(".hero-title", { x: 50, opacity: 0, duration: 1, delay: 0.4 });
+        gsap.from(".hero-subtitle", { x: 50, opacity: 0, duration: 1, delay: 0.6 });
+        gsap.from(".cta-button", { x: 50, opacity: 0, duration: 1, delay: 0.8 });
+        gsap.from(".hero-image", { scale: 0.5, opacity: 0, duration: 1.5, delay: 0.5, ease: "power3.out" });
         
-        // تأثير التوهج
-        gsap.from(".hero-visual-glow", { scale: 0, opacity: 0, duration: 2, delay: 0.2, ease: "power3.out" });
-
-        // حركة ظهور البطاقات عند التمرير
         gsap.from(".product-card", {
-            y: 50,
-            opacity: 0,
-            duration: 0.8,
-            stagger: 0.2, // ظهورها واحدة تلو الأخرى
-            scrollTrigger: {
-                trigger: ".products",
-                start: "top 80%", // تبدأ الحركة عندما يظهر القسم
-            }
+            y: 50, opacity: 0, duration: 0.8, stagger: 0.2,
+            scrollTrigger: { trigger: ".products", start: "top 80%" }
         });
     </script>
 </body>
