@@ -8,7 +8,7 @@ gsap.from(".cta-button", { x: 50, opacity: 0, duration: 1, delay: 0.8 });
 
 let mm = gsap.matchMedia();
 
-// 🖥️ حركة الكمبيوتر (تدخل الهواتف من اليمين واليسار)
+// 🖥️ حركة الكمبيوتر
 mm.add("(min-width: 769px)", () => {
     let tl = gsap.timeline({
         scrollTrigger: {
@@ -30,7 +30,7 @@ mm.add("(min-width: 769px)", () => {
       .to(".phone-5", { x: "0%", opacity: 1, scale: 1, rotationY: 0 }, "<");
 });
 
-// 📱 حركة الجوال (تظهر وتختفي الهواتف في نفس المكان بدون الخروج من الشاشة)
+// 📱 حركة الجوال (تظهر وتختفي الهواتف في نفس المنتصف)
 mm.add("(max-width: 768px)", () => {
     let mobileTl = gsap.timeline({
         scrollTrigger: {
@@ -42,7 +42,7 @@ mm.add("(max-width: 768px)", () => {
         }
     });
 
-    // في الجوال نستخدم التلاشي (opacity) بدلاً من السحب لليمين
+    // التبديل بين الهواتف في المنتصف
     mobileTl.to(".phone-1", { opacity: 0, scale: 0.8 })
             .to(".phone-2", { opacity: 1, scale: 1 }, "<")
             .to(".phone-2", { opacity: 0, scale: 0.8 })
