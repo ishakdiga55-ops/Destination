@@ -6,43 +6,58 @@
     <title>Destination - متجر الهواتف الذكية</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- مكتبة Google Model Viewer المجانية لعرض الـ 3D -->
+    <!-- مكتبة Google Model Viewer لعرض مجسمات الـ 3D -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-    
-    <style>
-        body {
-            margin: 0;
-            background-color: #0b0b0b;
-            color: #fff;
-            font-family: Arial, sans-serif;
-        }
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-        /* تنسيق عارض المجسم الثلاثي الأبعاد */
-        model-viewer {
-            width: 100%;
-            height: 85vh;
-            background-color: transparent;
-        }
-    </style>
 </head>
 <body>
 
-    <div class="hero-section">
-        <!-- عارض الهاتف 3D مع تفعيل الدوران التلقائي والتحكم باليد -->
-        <model-viewer 
-            src="iPhone%2014%20pro.glb" 
-            alt="iPhone 14 Pro 3D Model" 
-            auto-rotate 
-            camera-controls 
-            shadow-intensity="1">
-        </model-viewer>
-    </div>
+    <!-- القسم الأول: الهاتف الأول -->
+    <section class="hero-section">
+        <nav class="navbar">
+            <div class="logo">DESTINATION</div>
+            <ul class="nav-links">
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">المتجر</a></li>
+                <li><a href="#">اتصل بنا</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <h2>iPhone Pro Max</h2>
+            <p>القوة، الفخامة، والتكنولوجيا بين يديك.</p>
+            <button class="btn">اكتشف الآن</button>
+        </div>
+
+        <div class="model-container">
+            <!-- استخدام ملف الـ gltf الذي قمت برفعه -->
+            <model-viewer 
+                src="1.gltf" 
+                alt="Phone 3D Model" 
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1">
+            </model-viewer>
+        </div>
+    </section>
+
+    <!-- القسم الثاني: النزول وعرض الإصدار الثاني تحته -->
+    <section class="hero-section second-phone-section">
+        <div class="hero-content">
+            <h2>إصدار جديد كلياً</h2>
+            <p>تصميم مبتكر وأداء خارق يغير مقاييس الهواتف الذكية.</p>
+            <button class="btn">اطلب نسختك</button>
+        </div>
+
+        <div class="model-container">
+            <model-viewer 
+                src="1.gltf" 
+                alt="Second Phone 3D" 
+                auto-rotate 
+                camera-controls 
+                shadow-intensity="1">
+            </model-viewer>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
