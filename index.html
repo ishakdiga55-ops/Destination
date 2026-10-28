@@ -3,37 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Destination</title>
-    
-    <!-- ربط ملف التصميم -->
+    <title>Destination - متجر الهواتف الذكية</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- استدعاء خطوط جوجل (Tajawal للعربية و Inter للإنجليزية) -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة Google Model Viewer المجانية لعرض الـ 3D -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    
+    <style>
+        body {
+            margin: 0;
+            background-color: #0b0b0b;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        /* تنسيق عارض المجسم الثلاثي الأبعاد */
+        model-viewer {
+            width: 100%;
+            height: 85vh;
+            background-color: transparent;
+        }
+    </style>
 </head>
 <body>
 
-    <header class="hero-section">
-        <!-- طبقة الصورة الخلفية المتحركة -->
-        <div class="bg-image"></div>
-        <!-- طبقة التعتيم لجعل النص واضحاً -->
-        <div class="bg-overlay"></div>
+    <div class="hero-section">
+        <!-- عارض الهاتف 3D مع تفعيل الدوران التلقائي والتحكم باليد -->
+        <model-viewer 
+            src="iPhone%2014%20pro.glb" 
+            alt="iPhone 14 Pro 3D Model" 
+            auto-rotate 
+            camera-controls 
+            shadow-intensity="1">
+        </model-viewer>
+    </div>
 
-        <nav class="navbar animate-fade-down">
-            <h1 class="logo">DESTINATION</h1>
-            <ul class="nav-links">
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#">الوجهات</a></li>
-                <li><a href="#">من نحن</a></li>
-            </ul>
-        </nav>
-
-        <div class="hero-content">
-            <h2 class="animate-up">اكتشف العالم بأسلوب مختلف</h2>
-            <p class="animate-up delay-1">تجارب سفر استثنائية مصممة خصيصاً لك، لتعيش اللحظة بكل تفاصيلها.</p>
-            <button class="btn animate-up delay-2">ابدأ رحلتك</button>
-        </div>
-    </header>
-
+    <script src="script.js"></script>
 </body>
 </html>
