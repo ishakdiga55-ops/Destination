@@ -32,7 +32,6 @@
         .nav-links a:hover { color: var(--neon-green); }
 
         .hero { position: relative; height: 100vh; display: flex; align-items: center; z-index: 10; padding: 0 100px; }
-        
         .hero-content { flex: 1; z-index: 10; padding-left: 50px; }
         .hero-top-text { font-size: 0.8rem; color: var(--text-gray); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
         .hero-title { font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; line-height: 1.1; margin-bottom: 20px; }
@@ -42,23 +41,20 @@
         .cta-button { background: var(--neon-green); border: none; color: var(--bg-dark); padding: 15px 40px; font-size: 1rem; font-family: 'Cairo', sans-serif; font-weight: 700; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(204, 255, 0, 0.2); }
         .cta-button:hover { box-shadow: 0 0 40px rgba(204, 255, 0, 0.6); transform: translateY(-3px); }
 
-        .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; height: 100%; perspective: 1000px; }
-        
-        .glow-effect { position: absolute; width: 350px; height: 350px; background: var(--neon-green); filter: blur(130px); opacity: 0.25; z-index: 1; border-radius: 50%; }
+        .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; height: 100%; perspective: 1200px; }
+        .glow-effect { position: absolute; width: 350px; height: 350px; background: var(--neon-green); filter: blur(140px); opacity: 0.25; z-index: 1; border-radius: 50%; }
         
         .hero-image { 
             position: relative; z-index: 2; 
-            max-height: 75vh; width: auto; object-fit: contain; 
-            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.9)); 
-            animation: float 6s ease-in-out infinite; 
+            max-height: 80vh; width: auto; object-fit: contain; 
+            filter: drop-shadow(0 40px 60px rgba(0,0,0,0.9)); 
             transform: rotateY(-25deg) rotateX(10deg) rotateZ(5deg);
-            min-width: 200px; 
-            min-height: 300px;
+            animation: float 6s ease-in-out infinite; 
         }
         
         @keyframes float { 
             0% { transform: translateY(0px) rotateY(-25deg) rotateX(10deg) rotateZ(5deg); } 
-            50% { transform: translateY(-20px) rotateY(-20deg) rotateX(5deg) rotateZ(2deg); } 
+            50% { transform: translateY(-25px) rotateY(-15deg) rotateX(5deg) rotateZ(2deg); } 
             100% { transform: translateY(0px) rotateY(-25deg) rotateX(10deg) rotateZ(5deg); } 
         }
 
@@ -77,12 +73,16 @@
         @media (max-width: 768px) {
             nav { padding: 20px; }
             .nav-links { display: none; }
-            .hero { flex-direction: column; padding: 120px 20px 40px 20px; height: auto; text-align: center; }
-            .hero-content { padding-left: 0; }
-            .hero-subtitle { margin: 0 auto 30px auto; }
-            .hero-visual { margin-top: 40px; height: 50vh; min-height: 400px; } 
-            .hero-image { max-height: 100%; transform: none; animation: float-mobile 6s ease-in-out infinite; }
-            @keyframes float-mobile { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
+            .hero { flex-direction: column; padding: 90px 20px 20px 20px; height: auto; min-height: 100vh; text-align: center; }
+            .hero-content { padding-left: 0; margin-bottom: 20px; }
+            .hero-title { font-size: 2.8rem; }
+            .hero-subtitle { margin: 0 auto 20px auto; font-size: 1rem; }
+            .hero-visual { margin-top: 10px; height: 45vh; width: 100%; } 
+            .hero-image { max-height: 100%; transform: scale(0.9); animation: float-mobile 6s ease-in-out infinite; }
+            @keyframes float-mobile { 
+                0%, 100% { transform: translateY(0px) scale(0.9); } 
+                50% { transform: translateY(-15px) scale(0.9); } 
+            }
             .products { padding: 50px 20px; }
         }
     </style>
@@ -105,8 +105,12 @@
         </div>
         <div class="hero-visual">
             <div class="glow-effect"></div>
-            <!-- رابط مباشر ومستقر من GitHub، لن يُحظر أبداً -->
-            <img src="https://raw.githubusercontent.com/jonnyjackson26/device-frames-media/main/device-frames-output/Android%20Phone/Pixel%208%20Pro/Black/frame.png" alt="Smartphone" class="hero-image">
+            
+            <!-- هنا استخدمنا اسم صورتك الحالي مع ترميز المسافة %20 -->
+            <img src="iPhone%20.PNG" 
+                 alt="Smartphone" 
+                 class="hero-image" 
+                 onerror="this.src='https://raw.githubusercontent.com/jonnyjackson26/device-frames-media/main/device-frames-output/Android%20Phone/Pixel%208%20Pro/Black/frame.png'">
         </div>
     </section>
 
@@ -143,11 +147,6 @@
         gsap.from(".hero-subtitle", { x: 50, opacity: 0, duration: 1, delay: 0.6 });
         gsap.from(".cta-button", { x: 50, opacity: 0, duration: 1, delay: 0.8 });
         gsap.from(".hero-image", { scale: 0.5, opacity: 0, duration: 1.5, delay: 0.5, ease: "power3.out" });
-        
-        gsap.from(".product-card", {
-            y: 50, opacity: 0, duration: 0.8, stagger: 0.2,
-            scrollTrigger: { trigger: ".products", start: "top 80%" }
-        });
     </script>
 </body>
 </html>
