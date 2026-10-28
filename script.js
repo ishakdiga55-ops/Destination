@@ -1,6 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// 1. حركة دخول النصوص
+// حركة دخول النصوص
 gsap.from(".hero-top-text", { y: -20, opacity: 0, duration: 1, delay: 0.2 });
 gsap.from(".hero-title", { x: 50, opacity: 0, duration: 1, delay: 0.4 });
 gsap.from(".hero-subtitle", { x: 50, opacity: 0, duration: 1, delay: 0.6 });
@@ -8,7 +8,7 @@ gsap.from(".cta-button", { x: 50, opacity: 0, duration: 1, delay: 0.8 });
 
 let mm = gsap.matchMedia();
 
-// 🖥️ حركة الكمبيوتر فقط (الحركة السينمائية للهواتف الخمسة)
+// 🖥️ حركة الكمبيوتر (تدخل الهواتف من اليمين واليسار)
 mm.add("(min-width: 769px)", () => {
     let tl = gsap.timeline({
         scrollTrigger: {
@@ -30,14 +30,25 @@ mm.add("(min-width: 769px)", () => {
       .to(".phone-5", { x: "0%", opacity: 1, scale: 1, rotationY: 0 }, "<");
 });
 
-// 📱 حركة الجوال (بسيطة جداً، بدون تثبيت، فقط إظهار الهاتف الأول)
+// 📱 حركة الجوال (تظهر وتختفي الهواتف في نفس المكان بدون الخروج من الشاشة)
 mm.add("(max-width: 768px)", () => {
-    // إظهار الهاتف الأول فقط بحركة ناعمة عند فتح الصفحة
-    gsap.from(".phone-1", { 
-        scale: 0.8, 
-        opacity: 0, 
-        duration: 1.2, 
-        delay: 0.5, 
-        ease: "power3.out" 
+    let mobileTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".scroll-container",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.5, 
+            pin: true, 
+        }
     });
+
+    // في الجوال نستخدم التلاشي (opacity) بدلاً من السحب لليمين
+    mobileTl.to(".phone-1", { opacity: 0, scale: 0.8 })
+            .to(".phone-2", { opacity: 1, scale: 1 }, "<")
+            .to(".phone-2", { opacity: 0, scale: 0.8 })
+            .to(".phone-3", { opacity: 1, scale: 1 }, "<")
+            .to(".phone-3", { opacity: 0, scale: 0.8 })
+            .to(".phone-4", { opacity: 1, scale: 1 }, "<")
+            .to(".phone-4", { opacity: 0, scale: 0.8 })
+            .to(".phone-5", { opacity: 1, scale: 1 }, "<");
 });
