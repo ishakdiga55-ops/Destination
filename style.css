@@ -25,16 +25,26 @@ body {
 nav { 
     position: fixed; top: 0; width: 100%; padding: 20px 50px; 
     display: flex; justify-content: space-between; align-items: center; z-index: 1000; 
-    background: rgba(2,2,2,0.8); backdrop-filter: blur(10px); /* خلفية ضبابية أنيقة */
+    background: rgba(2,2,2,0.8); backdrop-filter: blur(10px); 
 }
 .logo { font-size: 1.5rem; font-weight: 900; color: var(--neon-green); letter-spacing: 2px; }
 .nav-links { display: flex; gap: 40px; }
 .nav-links a { color: var(--text-white); text-decoration: none; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; transition: color 0.3s; }
 .nav-links a:hover { color: var(--neon-green); }
 
-/* قسم الهيرو (الكمبيوتر) */
-.scroll-container { position: relative; height: 500vh; } 
-.hero { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; z-index: 10; padding: 0 100px; }
+/* حاوية التمرير */
+.scroll-container { position: relative; height: 500vh; } /* مسافة كافية لمرور 5 هواتف */
+.hero { 
+    position: sticky; 
+    top: 0; 
+    height: 100vh; 
+    height: 100dvh; /* دعم متصفحات الآيفون */
+    display: flex; 
+    align-items: center; 
+    z-index: 10; 
+    padding: 0 100px; 
+    overflow: hidden;
+}
 
 .hero-content { flex: 1; z-index: 10; padding-left: 50px; }
 .hero-top-text { font-size: 0.8rem; color: var(--text-gray); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
@@ -63,85 +73,37 @@ nav {
 /* إخفاء الهواتف 2 إلى 5 في البداية */
 .phone-2, .phone-3, .phone-4, .phone-5 { opacity: 0; transform: translateX(100%) scale(0.8); }
 
-.spacer { height: 100vh; background: transparent; }
-
-/* قسم المنتجات */
-.products { position: relative; z-index: 20; padding: 100px 50px; background-color: var(--bg-dark); text-align: center; }
-.section-header { margin-bottom: 60px; }
-.section-header h2 { font-size: 2.5rem; font-weight: 900; color: var(--text-white); margin-bottom: 10px; }
-.section-header p { color: var(--neon-green); letter-spacing: 3px; font-size: 0.9rem; text-transform: uppercase; }
-
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
-.product-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 30px 20px; transition: all 0.4s ease; position: relative; overflow: hidden; }
-.product-card:hover { transform: translateY(-10px); border-color: rgba(204, 255, 0, 0.3); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(204, 255, 0, 0.1); }
-.product-image-container { height: 200px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-.product-img { max-height: 100%; max-width: 80%; object-fit: contain; filter: drop-shadow(0 15px 20px rgba(0,0,0,0.8)); transition: transform 0.4s ease; mix-blend-mode: screen; }
-.product-card:hover .product-img { transform: scale(1.1); }
-.product-card h3 { font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
-.product-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
-.product-price { color: var(--neon-green); font-size: 1.8rem; font-weight: 900; margin-bottom: 20px; }
-
 /* ========================================= */
-/* --- إصلاحات الجوال الجذرية (لإنهاء الفوضى) --- */
+/* --- إعدادات الجوال (توسيط الهواتف) --- */
 /* ========================================= */
 @media (max-width: 768px) {
-    nav { padding: 15px 20px; background: rgba(2,2,2,0.95); }
+    nav { padding: 15px 20px; }
     .nav-links { display: none; }
     
-    /* إلغاء المسافات الطويلة والتثبيت */
-    .scroll-container { height: auto; }
-    .spacer { display: none; }
-    
-    /* إعادة ترتيب الهيرو ليكون عمودياً ومرتباً */
     .hero { 
-        position: relative; 
         flex-direction: column; 
-        justify-content: center;
-        padding: 100px 20px 40px 20px; 
+        padding: 90px 20px 40px 20px; 
         text-align: center; 
-        height: 100vh;
+        justify-content: flex-start;
     }
     
-    .hero-content { 
-        padding-left: 0; 
-        margin-bottom: 30px; 
-        width: 100%;
-        z-index: 10;
-    }
-    
+    .hero-content { padding-left: 0; margin-bottom: 20px; }
     .hero-title { font-size: 2.5rem; }
-    .hero-subtitle { margin: 0 auto 20px auto; font-size: 0.9rem; max-width: 100%; }
+    .hero-subtitle { margin: 0 auto 20px auto; font-size: 0.9rem; }
     
-    /* إصلاح حاوية الهواتف في الجوال */
     .hero-visual { 
         height: 50vh; 
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
+        width: 100%; 
     } 
     
-    /* تصغير الهواتف وتوسيطها بالقوة */
+    /* توسيع الصور وتوسيطها في الجوال */
     .phone { 
-        position: absolute;
         max-height: 100%; 
-        max-width: 85vw;
+        max-width: 90vw;
         left: 50%;
-        transform: translateX(-50%);
+        top: 50%;
+        transform: translate(-50%, -50%);
     }
 
-    /* إخفاء الهواتف الأخرى في الجوال لتجنب التراكب */
-    .phone-2, .phone-3, .phone-4, .phone-5 {
-        opacity: 0;
-        transform: translateX(-50%) scale(0.8);
-    }
-
-    .glow-effect { 
-        width: 250px; 
-        height: 250px; 
-        filter: blur(80px); 
-        left: 50%; 
-        transform: translateX(-50%);
-    }
+    .glow-effect { width: 250px; height: 250px; filter: blur(80px); left: 50%; transform: translateX(-50%); top: 50%; }
 }
