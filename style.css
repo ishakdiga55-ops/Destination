@@ -1,5 +1,5 @@
 :root { 
-    --bg-dark: #030303; /* أسود أعمق */
+    --bg-dark: #020202; 
     --neon-green: #ccff00; 
     --text-white: #ffffff; 
     --text-gray: #888888; 
@@ -12,35 +12,28 @@ body {
     background-color: var(--bg-dark); 
     color: var(--text-white);
     overflow-x: hidden; 
-    background-image: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #030303 100%);
+    background-image: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #020202 100%);
 }
 
-/* شبكة الخلفية (مثل Fortune Code) */
 .grid-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px), 
-        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-    background-size: 60px 60px; z-index: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; z-index: 0; pointer-events: none;
 }
 
-/* شريط التنقل */
 nav { 
-    position: fixed; top: 0; width: 100%; padding: 20px 50px; 
+    position: fixed; top: 0; width: 100%; padding: 25px 50px; 
     display: flex; justify-content: space-between; align-items: center; z-index: 100; 
-    background: linear-gradient(to bottom, rgba(3,3,3,0.9), transparent); 
+    background: linear-gradient(to bottom, rgba(2,2,2,0.9), transparent); 
 }
-.logo { font-size: 1.2rem; font-weight: 900; color: var(--neon-green); letter-spacing: 2px; }
+.logo { font-size: 1.5rem; font-weight: 900; color: var(--neon-green); letter-spacing: 2px; }
 .nav-links { display: flex; gap: 40px; }
-.nav-links a { color: var(--text-white); text-decoration: none; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; transition: color 0.3s; letter-spacing: 1px;}
+.nav-links a { color: var(--text-white); text-decoration: none; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; transition: color 0.3s; }
 .nav-links a:hover { color: var(--neon-green); }
 
-/* قسم الهيرو */
-.hero { 
-    position: relative; height: 100vh; 
-    display: flex; align-items: center; z-index: 10; 
-    padding: 0 100px; 
-}
+/* التمرير السينمائي */
+.scroll-container { position: relative; height: 300vh; }
+.hero { position: sticky; top: 0; height: 100vh; display: flex; align-items: center; z-index: 10; padding: 0 100px; }
 
 .hero-content { flex: 1; z-index: 10; padding-left: 50px; }
 .hero-top-text { font-size: 0.8rem; color: var(--text-gray); letter-spacing: 5px; text-transform: uppercase; margin-bottom: 20px; font-weight: 700; }
@@ -48,71 +41,31 @@ nav {
 .hero-title span { color: var(--neon-green); font-weight: 900; display: block; text-shadow: 0 0 20px rgba(204, 255, 0, 0.3); }
 .hero-subtitle { font-size: 1rem; color: var(--text-gray); max-width: 450px; line-height: 1.8; margin-bottom: 40px; }
 
-.cta-button { 
-    background: var(--neon-green); border: none; color: var(--bg-dark); 
-    padding: 15px 40px; font-size: 0.9rem; font-family: 'Cairo', sans-serif; 
-    font-weight: 900; border-radius: 3px; cursor: pointer; transition: all 0.3s ease; 
-    box-shadow: 0 0 20px rgba(204, 255, 0, 0.2); text-transform: uppercase; letter-spacing: 1px;
-}
+.cta-button { background: var(--neon-green); border: none; color: var(--bg-dark); padding: 15px 40px; font-size: 0.9rem; font-family: 'Cairo', sans-serif; font-weight: 900; border-radius: 3px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(204, 255, 0, 0.2); }
 .cta-button:hover { box-shadow: 0 0 40px rgba(204, 255, 0, 0.6); transform: translateY(-3px); }
 
-/* الجزء البصري */
-.hero-visual { 
-    flex: 1; display: flex; justify-content: center; align-items: center; 
-    position: relative; height: 100%; perspective: 1500px; 
-}
+.hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; height: 100%; perspective: 1500px; }
 
-/* التوهج الأخضر خلف الهاتف */
-.glow-effect { 
-    position: absolute; width: 400px; height: 400px; 
-    background: var(--neon-green); 
-    filter: blur(120px); opacity: 0.25; 
-    z-index: 1; border-radius: 50%; 
-    transition: transform 0.1s ease;
-}
+.glow-effect { position: absolute; width: 500px; height: 500px; background: var(--neon-green); filter: blur(150px); opacity: 0.2; z-index: 1; border-radius: 50%; }
 
-.image-wrapper { 
-    position: relative; z-index: 2; 
-    transform-style: preserve-3d;
-    transition: transform 0.1s ease;
-}
+.phone-container { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 2; }
 
-.hero-image { 
-    max-height: 80vh; width: auto; object-fit: contain; 
-    filter: drop-shadow(0 30px 50px rgba(0,0,0,1)); 
-}
+.phone { position: absolute; max-height: 75vh; width: auto; object-fit: contain; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.9)); }
 
-/* تفاصيل تقنية دقيقة (مثل الصورة) */
-.tech-line { position: absolute; background: rgba(255,255,255,0.1); height: 1px; width: 100px; }
-.tech-label { position: absolute; color: var(--text-gray); font-size: 0.6rem; letter-spacing: 2px; text-transform: uppercase;}
-.line-top { top: 30%; left: 5%; }
-.label-top { top: 27%; left: 5%; }
-.line-bottom { bottom: 30%; right: 5%; }
-.label-bottom { bottom: 27%; right: 5%; text-align: right; }
+.phone-2 { opacity: 0; transform: translateX(100%) scale(0.8); }
+.phone-3 { opacity: 0; transform: translateX(100%) scale(0.8); }
 
-/* قسم المنتجات */
-.products { position: relative; z-index: 10; padding: 100px 50px; background-color: var(--bg-dark); border-top: 1px solid rgba(255,255,255,0.05); }
-.section-header { text-align: center; margin-bottom: 60px; }
-.section-header h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
-.section-header p { color: var(--neon-green); letter-spacing: 2px; font-size: 0.8rem; text-transform: uppercase;}
+.spacer { height: 100vh; background: transparent; }
 
-.product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-.product-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; text-align: center; transition: all 0.4s ease; }
-.product-card:hover { border-color: var(--neon-green); box-shadow: 0 10px 30px rgba(204, 255, 0, 0.1); transform: translateY(-5px); }
-.product-image { width: 100%; height: 200px; background-color: #0a0a0a; border-radius: 10px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; color: var(--text-gray); }
-.product-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-.product-price { color: var(--neon-green); font-size: 1.5rem; font-weight: 900; margin-bottom: 15px; }
-
-/* الجوال */
 @media (max-width: 768px) {
     nav { padding: 15px 20px; }
     .nav-links { display: none; }
-    .hero { flex-direction: column; padding: 120px 20px 40px 20px; text-align: center; height: auto; }
-    .hero-content { padding-left: 0; margin-bottom: 40px; }
+    .scroll-container { height: 250vh; }
+    .hero { flex-direction: column; padding: 100px 20px 40px 20px; text-align: center; }
+    .hero-content { padding-left: 0; margin-bottom: 20px; }
     .hero-title { font-size: 2.5rem; }
-    .hero-subtitle { margin: 0 auto 20px auto; }
-    .hero-visual { height: 50vh; } 
+    .hero-subtitle { margin: 0 auto 20px auto; font-size: 0.9rem; }
+    .hero-visual { height: 50vh; width: 100%; } 
+    .phone { max-height: 45vh; }
     .glow-effect { width: 250px; height: 250px; filter: blur(80px); }
-    .tech-line, .tech-label { display: none; }
-    .products { padding: 50px 20px; }
 }
