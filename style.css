@@ -21,7 +21,6 @@ body {
     background-size: 40px 40px; z-index: 0; pointer-events: none;
 }
 
-/* شريط التنقل */
 nav { 
     position: fixed; top: 0; width: 100%; padding: 20px 50px; 
     display: flex; justify-content: space-between; align-items: center; z-index: 1000; 
@@ -32,7 +31,6 @@ nav {
 .nav-links a { color: var(--text-white); text-decoration: none; font-size: 0.8rem; font-weight: 500; text-transform: uppercase; transition: color 0.3s; }
 .nav-links a:hover { color: var(--neon-green); }
 
-/* حاوية التمرير */
 .scroll-container { position: relative; height: 500vh; } 
 .hero { 
     position: sticky; 
@@ -57,7 +55,7 @@ nav {
 
 .hero-visual { flex: 1; display: flex; justify-content: center; align-items: center; position: relative; height: 100%; perspective: 1500px; }
 
-.glow-effect { position: absolute; width: 500px; height: 500px; background: var(--neon-green); filter: blur(150px); opacity: 0.2; z-index: 1; border-radius: 50%; }
+.glow-effect { position: absolute; width: 500px; height: 500px; background: var(--neon-green); filter: blur(150px); opacity: 0.2; z-index: 1; border-radius: 50%; left: 50%; top: 50%; transform: translate(-50%, -50%); }
 
 .phone-container { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 2; }
 
@@ -67,28 +65,23 @@ nav {
     width: auto; 
     object-fit: contain; 
     filter: drop-shadow(0 30px 60px rgba(0,0,0,0.9)); 
-    mix-blend-mode: screen; 
+    mix-blend-mode: screen; /* إزالة الخلفية السوداء */
+    /* لا نضع transform هنا، كود JS سيتولى التوسيط */
 }
 
-/* إخفاء الهواتف 2 إلى 5 في البداية (للحركة على الكمبيوتر) */
-.phone-2, .phone-3, .phone-4, .phone-5 { opacity: 0; transform: translateX(100%) scale(0.8); }
-
-/* ========================================= */
-/* --- إصلاحات الجوال الجذرية --- */
-/* ========================================= */
 @media (max-width: 768px) {
     nav { padding: 15px 20px; }
     .nav-links { display: none; }
     
     .hero { 
         flex-direction: column; 
-        padding: 100px 20px 20px 20px; /* مسافة كافية لشريط التنقل */
+        padding: 100px 20px 20px 20px; 
         text-align: center; 
         justify-content: flex-start;
     }
     
     .hero-content { padding-left: 0; margin-bottom: 10px; }
-    .hero-title { font-size: 2.2rem; } /* تصغير الخط قليلاً ليتناسب */
+    .hero-title { font-size: 2.2rem; } 
     .hero-subtitle { margin: 0 auto 15px auto; font-size: 0.85rem; }
     
     .hero-visual { 
@@ -96,27 +89,15 @@ nav {
         width: 100%; 
     } 
     
-    /* توسيع الصور وتوسيطها في الجوال */
+    /* تصغير الهواتف في الجوال */
     .phone { 
-        max-height: 100%; 
-        max-width: 90vw;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    /* إلغاء الإزاحة في الجوال لكي تظهر الهواتف فوق بعضها في المنتصف */
-    .phone-2, .phone-3, .phone-4, .phone-5 { 
-        opacity: 0; 
-        transform: translate(-50%, -50%) scale(0.8); 
+        max-height: 45vh; 
+        max-width: 85vw;
     }
 
     .glow-effect { 
         width: 250px; 
         height: 250px; 
         filter: blur(80px); 
-        left: 50%; 
-        transform: translateX(-50%); 
-        top: 50%; 
-    }
+اله    }
 }
