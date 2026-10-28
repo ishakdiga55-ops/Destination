@@ -11,7 +11,6 @@ body {
     overflow-x: hidden;
 }
 
-/* قسم الـ Hero ليحتوي المجسم ثلاثي الأبعاد بشكل سينمائي */
 .hero-section {
     position: relative;
     height: 100vh; 
@@ -22,9 +21,13 @@ body {
     text-align: center;
     overflow: hidden;
     padding: 2rem 5%;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
-/* تنسيق شريط التنقل (Navbar) */
+.second-phone-section {
+    background: #0b0b0b;
+}
+
 .navbar {
     width: 100%;
     display: flex;
@@ -59,7 +62,6 @@ body {
     text-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
-/* محتوى النصوص العلوي */
 .hero-content {
     position: relative;
     z-index: 5;
@@ -79,7 +81,6 @@ body {
     color: #c0c0c0;
 }
 
-/* تنسيق حاوية العرض ثلاثي الأبعاد (3D Model Viewer) */
 .model-container {
     position: absolute;
     top: 0;
@@ -90,7 +91,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    pointer-events: auto; /* السماح بالتفاعل مع الماوس لتدوير الهاتف */
 }
 
 model-viewer {
@@ -100,7 +100,6 @@ model-viewer {
     --poster-color: transparent;
 }
 
-/* الأزرار الفخمة */
 .btn {
     padding: 0.8rem 2.5rem;
     font-size: 1.1rem;
@@ -122,34 +121,6 @@ model-viewer {
     box-shadow: 0 8px 25px rgba(255,255,255,0.3);
 }
 
-/* ------------------------------------- */
-/* الأنيميشن (التأثيرات الحركية) */
-/* ------------------------------------- */
-
-.animate-up {
-    opacity: 0; 
-    transform: translateY(30px); 
-    animation: fadeUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; 
-}
-
-.animate-fade-down {
-    opacity: 0;
-    transform: translateY(-20px);
-    animation: fadeDown 1s ease-out forwards;
-}
-
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-
-@keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeDown {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* جعل الموقع متجاوباً مع شاشات الهواتف */
 @media (max-width: 768px) {
     .navbar { flex-direction: column; gap: 1rem; padding: 1rem 0; }
     .hero-content h2 { font-size: 2.2rem; }
