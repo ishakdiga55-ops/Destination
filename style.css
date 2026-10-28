@@ -63,7 +63,7 @@ body {
     text-shadow: 0 0 10px rgba(255,255,255,0.5);
 }
 
-/* حاوية المجسم ثلاثي الأبعاد بالخلفية وتسمح بالدوران */
+/* حاوية المجسم ثلاثي الأبعاد بالخلفية وتسمح بالدوران والتوسيط */
 .model-container {
     position: absolute;
     top: 0;
@@ -81,6 +81,8 @@ model-viewer {
     height: 100%;
     background-color: transparent;
     --poster-color: transparent;
+    /* تكبير المجسم ليمتلئ به الفراغ بشكل سينمائي واضح */
+    transform: scale(2.2); 
 }
 
 /* النصوص والعنوان في الأسفل بترتيب نظيف */
