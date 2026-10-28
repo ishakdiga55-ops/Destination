@@ -1,22 +1,39 @@
-<header class="hero-section">
-    <!-- شريط التنقل العلوي -->
-    <nav class="navbar">
-        <h1 class="logo">DESTINATION</h1>
-        <ul class="nav-links">
-            <li><a href="#">الرئيسية</a></li>
-            <li><a href="#">الوجهات</a></li>
-            <li><a href="#">من نحن</a></li>
-        </ul>
-    </nav>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination</title>
+    
+    <!-- ربط ملف التصميم -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- استدعاء خطوط جوجل (Tajawal للعربية و Inter للإنجليزية) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
 
-    <!-- المحتوى الرئيسي في المنتصف -->
-    <div class="hero-content">
-        <!-- أضفنا كلاس animate-up لعمل التأثير الحركي -->
-        <h2 class="animate-up">اكتشف العالم بأسلوب مختلف</h2>
-        <p class="animate-up delay-1">تجارب سفر استثنائية مصممة خصيصاً لك، لتعيش اللحظة بكل تفاصيلها.</p>
-        <button class="btn animate-up delay-2">ابدأ رحلتك</button>
-    </div>
+    <header class="hero-section">
+        <!-- طبقة الصورة الخلفية المتحركة -->
+        <div class="bg-image"></div>
+        <!-- طبقة التعتيم لجعل النص واضحاً -->
+        <div class="bg-overlay"></div>
 
-    <!-- طبقة شفافة داكنة لجعل النص أكثر وضوحاً فوق صورة الخلفية -->
-    <div class="bg-overlay"></div>
-</header>
+        <nav class="navbar animate-fade-down">
+            <h1 class="logo">DESTINATION</h1>
+            <ul class="nav-links">
+                <li><a href="#">الرئيسية</a></li>
+                <li><a href="#">الوجهات</a></li>
+                <li><a href="#">من نحن</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero-content">
+            <h2 class="animate-up">اكتشف العالم بأسلوب مختلف</h2>
+            <p class="animate-up delay-1">تجارب سفر استثنائية مصممة خصيصاً لك، لتعيش اللحظة بكل تفاصيلها.</p>
+            <button class="btn animate-up delay-2">ابدأ رحلتك</button>
+        </div>
+    </header>
+
+</body>
+</html>
