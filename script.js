@@ -6,10 +6,9 @@ gsap.from(".hero-title", { x: 50, opacity: 0, duration: 1, delay: 0.4 });
 gsap.from(".hero-subtitle", { x: 50, opacity: 0, duration: 1, delay: 0.6 });
 gsap.from(".cta-button", { x: 50, opacity: 0, duration: 1, delay: 0.8 });
 
-// 2. فصل الحركات (كمبيوتر vs جوال)
 let mm = gsap.matchMedia();
 
-// 🖥️ حركة الكمبيوتر (سينمائية)
+// 🖥️ حركة الكمبيوتر فقط (الحركة السينمائية للهواتف الخمسة)
 mm.add("(min-width: 769px)", () => {
     let tl = gsap.timeline({
         scrollTrigger: {
@@ -21,10 +20,9 @@ mm.add("(min-width: 769px)", () => {
         }
     });
 
-    // تسلسل الهواتف الخمسة
     tl.to(".phone-1", { x: "-100%", opacity: 0, scale: 0.8, rotationY: -20 })
       .to(".phone-2", { x: "0%", opacity: 1, scale: 1, rotationY: 0 }, "<")
-      .to(".phone-2", { x: "-100%", opacity: 0, scale: 0.8, rotationY: -20ح })
+      .to(".phone-2", { x: "-100%", opacity: 0, scale: 0.8, rotationY: -20 })
       .to(".phone-3", { x: "0%", opacity: 1, scale: 1, rotationY: 0 }, "<")
       .to(".phone-3", { x: "-100%", opacity: 0, scale: 0.8, rotationY: -20 })
       .to(".phone-4", { x: "0%", opacity: 1, scale: 1, rotationY: 0 }, "<")
@@ -32,20 +30,14 @@ mm.add("(min-width: 769px)", () => {
       .to(".phone-5", { x: "0%", opacity: 1, scale: 1, rotationY: 0 }, "<");
 });
 
-// 📱 حركة الجوال (بسيطة وآمنة بدون تثبيت)
+// 📱 حركة الجوال (بسيطة جداً، بدون تثبيت، فقط إظهار الهاتف الأول)
 mm.add("(max-width: 768px)", () => {
-    // إظهار الهاتف الأول فقط عند الفتح
-    gsap.from(".phone-1", { scale: 0.8, opacity: 0, duration: 1, delay: 0.5 });
-    
-    // (اختياري) تبديل بسيط للهواتف عند التمرير بدون تثبيت الشاشة
-    let mobileTl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1
-        }
+    // إظهار الهاتف الأول فقط بحركة ناعمة عند فتح الصفحة
+    gsap.from(".phone-1", { 
+        scale: 0.8, 
+        opacity: 0, 
+        duration: 1.2, 
+        delay: 0.5, 
+        ease: "power3.out" 
     });
-    mobileTl.to(".phone-1", { opacity: 0, duration: 1 }, "+=1")
-            .to(".phone-2", { opacity: 1, scale: 1, duration: 1 }, "<");
 });
