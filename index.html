@@ -1,60 +1,22 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر الهواتف الذكية | TECH ZONE</title>
-    
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-</head>
-<body>
-    <div class="grid-overlay"></div>
-    
-    <nav>
-        <div class="logo">TECH ZONE</div>
-        <div class="nav-links">
-            <a href="#">الرئيسية</a> 
-            <a href="#">الهواتف</a> 
-            <a href="#">الإكسسوارات</a> 
-            <a href="#">اتصل بنا</a>
-        </div>
+<header class="hero-section">
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar">
+        <h1 class="logo">DESTINATION</h1>
+        <ul class="nav-links">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">الوجهات</a></li>
+            <li><a href="#">من نحن</a></li>
+        </ul>
     </nav>
 
-    <div class="scroll-container">
-        <section class="hero">
-            <div class="hero-content">
-                <div class="hero-top-text">NEXT GENERATION TECH</div>
-                <h1 class="hero-title">اكتشف المستقبل<br><span>بين يديك</span></h1>
-                <p class="hero-subtitle">أحدث الهواتف الذكية من آيفون، سامسونج، جوجل، هونر، وشاومي. تكنولوجيا متطورة وتصميم يعكس الفخامة.</p>
-                <button class="cta-button">استكشف الأجهزة</button>
-            </div>
-
-            <div class="hero-visual">
-                <div class="glow-effect"></div>
-                <div class="phone-container">
-                    <img src="iPhone.PNG" alt="iPhone" class="phone phone-1">
-                    <img src="samsung.JPG" alt="Samsung" class="phone phone-2">
-                    <img src="pixel.JPG" alt="Google Pixel" class="phone phone-3">
-                    <img src="honor.JPG" alt="Honor" class="phone phone-4">
-                    <img src="xiaomi.JPG" alt="Xiaomi" class="phone phone-5">
-                </div>
-            </div>
-        </section>
+    <!-- المحتوى الرئيسي في المنتصف -->
+    <div class="hero-content">
+        <!-- أضفنا كلاس animate-up لعمل التأثير الحركي -->
+        <h2 class="animate-up">اكتشف العالم بأسلوب مختلف</h2>
+        <p class="animate-up delay-1">تجارب سفر استثنائية مصممة خصيصاً لك، لتعيش اللحظة بكل تفاصيلها.</p>
+        <button class="btn animate-up delay-2">ابدأ رحلتك</button>
     </div>
 
-    <!-- قسم جديد لملء الفراغ في نهاية الصفحة -->
-    <footer class="footer">
-        <h2>جاهز لاقتناء هاتفك القادم؟</h2>
-        <p>تواصل معنا الآن للحصول على أفضل العروض</p>
-        <button class="cta-button">تسوق الآن</button>
-        <div class="footer-bottom">
-            <p>© 2024 TECH ZONE. جميع الحقوق محفوظة.</p>
-        </div>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    <!-- طبقة شفافة داكنة لجعل النص أكثر وضوحاً فوق صورة الخلفية -->
+    <div class="bg-overlay"></div>
+</header>
