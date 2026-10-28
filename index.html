@@ -1,32 +1,117 @@
-<script>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر الهواتف الذكية | TECH ZONE</title>
+    
+    <!-- ربط ملف التصميم الخارجي -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- الخطوط والمكتبات -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <!-- استدعاء GSAP و ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<body>
+    <div class="grid-overlay"></div>
+    
+    <nav>
+        <div class="logo">TECH ZONE</div>
+        <div class="nav-links">
+            <a href="#">الرئيسية</a> 
+            <a href="#">الهواتف</a> 
+            <a href="#">الإكسسوارات</a> 
+            <a href="#">اتصل بنا</a>
+        </div>
+    </nav>
+
+    <!-- حاوية التمرير السينمائي -->
+    <div class="scroll-container">
+        <!-- قسم الهيرو -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-top-text">NEXT GENERATION TECH</div>
+                <h1 class="hero-title">اكتشف المستقبل<br><span>بين يديك</span></h1>
+                <p class="hero-subtitle">أحدث الهواتف الذكية والأجهزة اللوحية بأفضل الأسعار. تكنولوجيا متطورة، تصميم أنيق، وأداء لا يعرف الحدود.</p>
+                <button class="cta-button">استكشف الأجهزة</button>
+            </div>
+
+            <div class="hero-visual">
+                <div class="glow-effect"></div>
+                <div class="image-wrapper">
+                    <!-- ⚠️ تأكد أن اسم الصورة في GitHub يطابق الاسم هنا -->
+                    <img src="iPhone.PNG" alt="iPhone" class="hero-image">
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- قسم المنتجات -->
+    <section class="products">
+        <div class="section-header">
+            <h2>أحدث الإصدارات</h2>
+            <p>FEATURED PRODUCTS</p>
+        </div>
+        <div class="product-grid">
+            <div class="product-card">
+                <div class="product-image">صورة الهاتف 1</div>
+                <h3>iPhone 15 Pro Max</h3>
+                <div class="product-price">$1,199</div>
+                <button class="cta-button" style="padding: 10px; width: 100%;">أضف للسلة</button>
+            </div>
+            <div class="product-card">
+                <div class="product-image">صورة الهاتف 2</div>
+                <h3>Samsung S24 Ultra</h3>
+                <div class="product-price">$1,299</div>
+                <button class="cta-button" style="padding: 10px; width: 100%;">أضف للسلة</button>
+            </div>
+            <div class="product-card">
+                <div class="product-image">صورة الهاتف 3</div>
+                <h3>Google Pixel 8 Pro</h3>
+                <div class="product-price">$999</div>
+                <button class="cta-button" style="padding: 10px; width: 100%;">أضف للسلة</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // حركة دخول العناصر
+        // 1. حركة دخول العناصر عند فتح الصفحة
         gsap.from(".hero-top-text", { y: -20, opacity: 0, duration: 1, delay: 0.2 });
         gsap.from(".hero-title", { x: 50, opacity: 0, duration: 1, delay: 0.4 });
         gsap.from(".hero-subtitle", { x: 50, opacity: 0, duration: 1, delay: 0.6 });
         gsap.from(".cta-button", { x: 50, opacity: 0, duration: 1, delay: 0.8 });
 
-        // الحركة السينمائية (مخففة لتعمل بسلاسة)
+        // 2. الحركة السينمائية عند التمرير (مخففة لتعمل بسلاسة وبدون انقلاب)
         let tl = gsap.timeline({
             scrollTrigger: {
                 trigger: ".scroll-container",
                 start: "top top",
                 end: "bottom top",
-                scrub: 1, /* تقليل وقت الاستجابة ليكون أخف */
-                pin: true,
+                scrub: 1.5, 
+                pin: true, 
             }
         });
 
         tl.to(".image-wrapper", { 
-            scale: 1.3,           // تكبير بسيط
-            rotationY: 15,        // ميلان خفيف (بدون انقلاب)
-            y: -50,
+            scale: 1.4,           // تكبير الهاتف
+            rotationY: -15,       // ميلان خفيف جداً ليعطي إحساس 3D بدون انقلاب
+            y: -60,               // يرتفع قليلاً للأعلى
             ease: "power2.inOut" 
         })
+        .to(".glow-effect", {
+            scale: 1.3,
+            opacity: 0.5,
+            ease: "power2.inOut"
+        }, "<") // تحدث في نفس وقت الحركة السابقة
         .to(".hero-content", {
-            opacity: 0,
-            y: -50,
+            opacity: 0,           // يختفي النص بسلاسة
+            y: -80,
             ease: "power2.inOut"
         }, "<");
     </script>
+</body>
+</html>
