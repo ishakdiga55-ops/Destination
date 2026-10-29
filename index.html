@@ -6,7 +6,7 @@
     <title>Destination - متجر الهواتف الذكية</title>
     <link rel="stylesheet" href="style.css">
     
-    <!-- مكتبة Google Model Viewer لعرض المجسمات ثلاثية الأبعاد -->
+    <!-- مكتبة Google Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <!-- مكتبة GSAP للتأثيرات الحركية -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -25,16 +25,16 @@
             </ul>
         </nav>
 
-        <!-- حاوية المجسم ثلاثي الأبعاد مع التعديل الجديد للتوسيط والتكبير -->
+        <!-- حاوية المجسم ثلاثي الأبعاد -->
         <div class="model-container">
             <model-viewer 
-                src="IPHONE%2B16%2B.glb" 
+                src="iphone-16.glb" 
                 alt="iPhone 16 3D Model" 
                 auto-rotate 
                 camera-controls 
-                camera-orbit="0deg 75deg 100%" 
+                camera-orbit="0deg 75deg 105%" 
                 camera-target="0m 0m 0m"
-                scale="1.5 1.5 1.5"
+                interaction-prompt="none"
                 shadow-intensity="1">
             </model-viewer>
         </div>
@@ -46,7 +46,7 @@
         </div>
     </section>
 
-    <!-- القسم الثاني: النزول وعرض الإصدار الثاني تحته -->
+    <!-- القسم الثاني: الإصدار الثاني (iPhone 14) -->
     <section class="hero-section second-phone-section">
         <div class="hero-content">
             <h2>إصدار جديد كلياً</h2>
@@ -56,12 +56,13 @@
 
         <div class="model-container">
             <model-viewer 
-                src="iPhone%2014%20pro.glb" 
+                src="iphone-14-pro.glb" 
                 alt="iPhone 14 Pro 3D Model" 
                 auto-rotate 
                 camera-controls 
-                camera-orbit="0deg 75deg 105%" 
-                scale="0.8 0.8 0.8"
+                camera-orbit="0deg 75deg 110%" 
+                interaction-prompt="none"
+                loading="lazy"
                 shadow-intensity="1">
             </model-viewer>
         </div>
