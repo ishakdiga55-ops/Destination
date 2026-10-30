@@ -1,52 +1,77 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Destination - متجر الهواتف الذكية</title>
+    <title>Futuristic iPhone Showcase</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+    <!-- GLTFLoader for 3D models -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-    
-    <!-- مكتبة Google Model Viewer -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-    <!-- مكتبة GSAP للتأثيرات الحركية -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-<body>
-
-    <!-- القسم الوحيد: (iPhone 14 Pro) -->
-    <section class="hero-section">
-        <!-- تم نقل شريط التنقل إلى هنا -->
-        <nav class="navbar">
-            <div class="logo">DESTINATION</div>
-            <ul class="nav-links">
-                <li><a href="#">الرئيسية</a></li>
-                <li><a href="#">المتجر</a></li>
-                <li><a href="#">اتصل بنا</a></li>
-            </ul>
-        </nav>
-
-        <div class="hero-content">
-            <h2>إصدار جديد كلياً</h2>
-            <p>تصميم مبتكر وأداء خارق يغير مقاييس الهواتف الذكية.</p>
-            <button class="btn">اطلب نسختك</button>
+<body class="bg-[#0a0a0a] text-white font-space-grotesk overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-cyan-400 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-wider">NEXUS</span>
+            </div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#" class="hover:text-green-400 transition-colors">Home</a>
+                <a href="#" class="hover:text-green-400 transition-colors">Features</a>
+                <a href="#" class="hover:text-green-400 transition-colors">Specs</a>
+                <a href="#" class="hover:text-green-400 transition-colors">Contact</a>
+            </div>
+            <button class="px-6 py-2 border border-gray-600 rounded-full hover:bg-gray-800 transition-all">
+                Pre-order
+            </button>
         </div>
+    </nav>
 
-        <!-- حاوية المجسم ثلاثي الأبعاد -->
-        <div class="model-container">
-            <model-viewer 
-                src="iphone-14-pro.glb" 
-                alt="iPhone 14 Pro 3D Model" 
-                auto-rotate 
-                camera-controls 
-                camera-orbit="0deg 75deg 120%" 
-                scale="1 1 1"
-                interaction-prompt="none"
-                shadow-intensity="1">
-            </model-viewer>
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                Titanium.<br>
+                Engineered From Within.
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                The future of design meets unparalleled innovation. Experience the next dimension.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <button class="px-8 py-3 bg-transparent border border-gray-600 rounded-full hover:bg-gray-800 transition-all neon-btn">
+                    Explore
+                </button>
+                <button class="px-8 py-3 bg-green-500 hover:bg-green-600 rounded-full transition-all neon-btn">
+                    Learn More
+                </button>
+            </div>
         </div>
     </section>
 
+    <!-- 3D Model Container -->
+    <section class="relative w-full h-screen">
+        <div id="model-container" class="w-full h-full"></div>
+    </section>
+
+    <!-- Script -->
     <script src="script.js"></script>
 </body>
 </html>
