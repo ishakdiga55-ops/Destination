@@ -6,7 +6,9 @@
     <title>Destination - متجر الهواتف الذكية</title>
     <link rel="stylesheet" href="style.css">
     
+    <!-- مكتبة Google Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+    <!-- مكتبة GSAP للتأثيرات الحركية -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
@@ -23,15 +25,16 @@
             </ul>
         </nav>
 
+        <!-- حاوية المجسم ثلاثي الأبعاد للآيفون 16 -->
         <div class="model-container">
             <model-viewer 
                 src="iphone-16.glb" 
                 alt="iPhone 16 3D Model" 
                 auto-rotate 
                 camera-controls 
-                camera-orbit="0deg 75deg 50%" 
+                camera-orbit="0deg 75deg 105%" 
                 camera-target="0m 0m 0m"
-                scale="1 1 1"
+                scale="3.5 3.5 3.5" 
                 interaction-prompt="none"
                 shadow-intensity="1">
             </model-viewer>
@@ -52,13 +55,14 @@
             <button class="btn">اطلب نسختك</button>
         </div>
 
+        <!-- حاوية المجسم ثلاثي الأبعاد للآيفون 14 -->
         <div class="model-container">
             <model-viewer 
                 src="iphone-14-pro.glb" 
                 alt="iPhone 14 Pro 3D Model" 
                 auto-rotate 
                 camera-controls 
-                camera-orbit="0deg 75deg 200%" 
+                camera-orbit="0deg 75deg 160%" 
                 scale="1 1 1"
                 interaction-prompt="none"
                 loading="lazy"
