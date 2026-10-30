@@ -13,10 +13,10 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.from(content, {
                 scrollTrigger: {
                     trigger: section,
-                    start: "top 80%", // يبدأ التأثير عندما يظهر القسم بنسبة 80% في الشاشة
+                    start: "top 80%", 
                 },
-                y: 50, // يتحرك من الأسفل للأعلى
-                opacity: 0, // يظهر تدريجياً
+                y: 50, 
+                opacity: 0, 
                 duration: 1.2,
                 ease: "power3.out"
             });
