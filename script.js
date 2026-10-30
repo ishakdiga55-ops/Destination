@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
     0.1,
     100
   );
-  camera.position.set(0, 0, 4.2);
+  // 1. إبعاد الكاميرا
+  camera.position.set(0, 0, 6);
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -29,15 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
   controls.enableDamping = true;
   controls.enablePan = false;
   controls.minDistance = 3;
-  controls.maxDistance = 6;
+  controls.maxDistance = 8; // زيادة المسافة القصوى قليلاً
   controls.autoRotate = true;
   controls.autoRotateSpeed = 1.5;
 
-  // Lights
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.8);
+  // 2. تخفيف الإضاءة
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
   scene.add(ambientLight);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 2.5);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
   keyLight.position.set(3, 4, 5);
   scene.add(keyLight);
 
@@ -53,13 +54,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = new THREE.GLTFLoader();
   let model = null;
 
-  // تصحيح اسم الملف ليكون مطابقاً لمستودعك
   loader.load(
     "./iphone-14-pro.glb",
     (gltf) => {
       model = gltf.scene;
-      model.scale.set(1.7, 1.7, 1.7);
-      model.position.set(0, -0.55, 0);
+      // 3. تصغير الحجم وتوسيط الآيفون
+      model.scale.set(0.8, 0.8, 0.8);
+      model.position.set(0, 0, 0);
       scene.add(model);
     },
     undefined,
@@ -71,7 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Animation loop
   function animate() {
     requestAnimationFrame(animate);
-    // تم حذف سطر التدوير اليدوي لمنع التعارض مع التدوير التلقائي للكاميرا
     controls.update();
     renderer.render(scene, camera);
   }
