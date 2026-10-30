@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+  
+  // تقنية Tone Mapping لمعالجة الإضاءة العالية (مثل كاميرات التصوير)
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.2; 
+  renderer.outputEncoding = THREE.sRGBEncoding;
 
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
@@ -34,24 +39,31 @@ document.addEventListener("DOMContentLoaded", () => {
   controls.autoRotateSpeed = 1.5;
 
   // =========================
-  // LIGHTING (تم إزالة البنفسجي وإرجاع النيون)
+  // LIGHTING (إضاءة استوديو متوازنة)
   // =========================
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+  // 1. ضوء محيط خفيف جداً
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); 
   scene.add(ambientLight);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+  // 2. ضوء أبيض رئيسي (مُخفف)
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
   keyLight.position.set(3, 4, 5);
   scene.add(keyLight);
 
-  // إضاءة خلفية سماوية
-  const rimLight = new THREE.DirectionalLight(0x00d9ff, 2.0); // Cyan
-  rimLight.position.set(-4, 1, -2);
+  // 3. ضوء خلفي سماوي (يعطي جمالية للحواف)
+  const rimLight = new THREE.DirectionalLight(0x00d9ff, 1.5); 
+  rimLight.position.set(-5, 2, -2);
   scene.add(rimLight);
 
-  // إضاءة سفلية خضراء
-  const fillLight = new THREE.DirectionalLight(0x22ff88, 1.5); // Green
-  fillLight.position.set(0, -2, 2);
+  // 4. ضوء سفلي أخضر خفيف
+  const fillLight = new THREE.DirectionalLight(0x22ff88, 0.8); 
+  fillLight.position.set(0, -3, 2);
   scene.add(fillLight);
+
+  // 5. ضوء أمامي خفيف جداً لإبراز لون المعدن
+  const frontLight = new THREE.DirectionalLight(0xffffff, 0.5);
+  frontLight.position.set(0, 0, 5);
+  scene.add(frontLight);
 
   // =========================
   // LOAD MODEL
@@ -65,6 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
       model = gltf.scene;
       model.scale.set(0.8, 0.8, 0.8);
       model.position.set(0, -0.4, 0);
+      
+      // إمالة الآيفون قليلاً لإظهار سمكه وحوافه المعدنية (بدلاً من النظر للشاشة مباشرة)
+      model.rotation.y = -Math.PI / 6; 
+      
       scene.add(model);
     },
     undefined,
