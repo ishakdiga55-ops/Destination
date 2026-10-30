@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     0.1,
     100
   );
-  camera.position.set(0, 0, 7);
+  camera.position.set(0, 0, 5); 
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -29,27 +29,33 @@ document.addEventListener("DOMContentLoaded", () => {
   controls.enableDamping = true;
   controls.enablePan = false;
   controls.minDistance = 3;
-  controls.maxDistance = 10;
+  controls.maxDistance = 8;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 1.5;
 
-  // Lights (ألوان بنفسجية ووردية)
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  // =========================
+  // LIGHTING (تم إزالة البنفسجي وإرجاع النيون)
+  // =========================
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
   scene.add(ambientLight);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
   keyLight.position.set(3, 4, 5);
   scene.add(keyLight);
 
-  const rimLight = new THREE.DirectionalLight(0x9d00ff, 2.0); // بنفسجي
+  // إضاءة خلفية سماوية
+  const rimLight = new THREE.DirectionalLight(0x00d9ff, 2.0); // Cyan
   rimLight.position.set(-4, 1, -2);
   scene.add(rimLight);
 
-  const fillLight = new THREE.DirectionalLight(0xff00ff, 1.5); // وردي
+  // إضاءة سفلية خضراء
+  const fillLight = new THREE.DirectionalLight(0x22ff88, 1.5); // Green
   fillLight.position.set(0, -2, 2);
   scene.add(fillLight);
 
-  // Load GLB model
+  // =========================
+  // LOAD MODEL
+  // =========================
   const loader = new THREE.GLTFLoader();
   let model = null;
 
@@ -57,11 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     "./iphone-14-pro.glb",
     (gltf) => {
       model = gltf.scene;
-      model.scale.set(0.9, 0.9, 0.9); 
-      
-      // دالة لجعل الآيفون يتحرك حسب حجم الشاشة
-      updateModelPosition();
-      
+      model.scale.set(0.8, 0.8, 0.8);
+      model.position.set(0, -0.4, 0);
       scene.add(model);
     },
     undefined,
@@ -69,19 +72,6 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error loading model:", error);
     }
   );
-
-  // دالة ضبط مكان الآيفون
-  function updateModelPosition() {
-    if (!model) return;
-    
-    if (window.innerWidth > 1024) {
-      // شاشة كمبيوتر: الآيفون على اليمين
-      model.position.set(2.5, -0.5, 0);
-    } else {
-      // شاشة هاتف: الآيفون في المنتصف ومُنزل للأسفل ليترك مساحة للنص
-      model.position.set(0, -1.5, 0);
-    }
-  }
 
   // Animation loop
   function animate() {
@@ -100,9 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    
-    // تحديث مكان الآيفون عند تغيير حجم الشاشة
-    updateModelPosition();
   });
 
   // =========================
@@ -132,6 +119,13 @@ document.addEventListener("DOMContentLoaded", () => {
     y: 30,
     duration: 1,
     stagger: 0.12,
+    ease: "power3.out"
+  });
+
+  gsap.from(".hero-section .glass-strong", {
+    opacity: 0,
+    scale: 0.96,
+    duration: 1.2,
     ease: "power3.out"
   });
 
