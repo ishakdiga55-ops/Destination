@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     0.1,
     100
   );
-  // 1. إبعاد الكاميرا
   camera.position.set(0, 0, 6);
 
   const renderer = new THREE.WebGLRenderer({
@@ -30,27 +29,35 @@ document.addEventListener("DOMContentLoaded", () => {
   controls.enableDamping = true;
   controls.enablePan = false;
   controls.minDistance = 3;
-  controls.maxDistance = 8; // زيادة المسافة القصوى قليلاً
+  controls.maxDistance = 8;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 1.5;
 
-  // 2. تخفيف الإضاءة
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.0);
+  // =========================
+  // LIGHTING (تم تغيير الألوان هنا)
+  // =========================
+  // إضاءة محيطة خفيفة
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
   scene.add(ambientLight);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+  // إضاءة أساسية بيضاء
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.0);
   keyLight.position.set(3, 4, 5);
   scene.add(keyLight);
 
-  const rimLight = new THREE.DirectionalLight(0x00d9ff, 1.2);
+  // إضاءة بنفسجية (Rim Light) من الخلف
+  const rimLight = new THREE.DirectionalLight(0x9d00ff, 2.0); // لون بنفسجي
   rimLight.position.set(-4, 1, -2);
   scene.add(rimLight);
 
-  const fillLight = new THREE.DirectionalLight(0x22ff88, 0.8);
+  // إضاءة وردية/ماجنتا (Fill Light) من الأسفل
+  const fillLight = new THREE.DirectionalLight(0xff00ff, 1.5); // لون وردي
   fillLight.position.set(0, -2, 2);
   scene.add(fillLight);
 
-  // Load GLB model
+  // =========================
+  // LOAD MODEL (تم تعديل الموضع هنا)
+  // =========================
   const loader = new THREE.GLTFLoader();
   let model = null;
 
@@ -58,9 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "./iphone-14-pro.glb",
     (gltf) => {
       model = gltf.scene;
-      // 3. تصغير الحجم وتوسيط الآيفون
       model.scale.set(0.8, 0.8, 0.8);
-      model.position.set(0, 0, 0);
+      // إنزال الآيفون للأسفل بمقدار -0.5
+      model.position.set(0, -0.5, 0); 
       scene.add(model);
     },
     undefined,
