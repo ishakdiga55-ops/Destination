@@ -58,28 +58,25 @@
     </header>
 
     <main class="relative z-10">
-      <!-- HERO SECTION (الآيفون أصبح خلفية كاملة) -->
-      <section class="hero-section relative min-h-[100svh] flex items-center overflow-hidden">
-        
-        <!-- الـ Canvas يغطي الشاشة بالكامل -->
-        <canvas id="iphoneCanvas" class="absolute inset-0 w-full h-full z-0"></canvas>
-
-        <!-- النصوص تطفو فوق الآيفون -->
-        <div class="max-w-7xl mx-auto px-6 w-full relative z-10 pointer-events-none">
-          <div class="hero-copy max-w-xl pointer-events-auto mt-20 md:mt-0">
-            <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neonGreen/30 bg-black/40 backdrop-blur-sm text-sm text-neonGreen mb-6">
+      <!-- HERO (تصميم مقسم: نص يسار، آيفون يمين) -->
+      <section class="hero-section min-h-[100svh] flex items-center pt-10">
+        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-10 items-center py-10">
+          
+          <!-- النصوص -->
+          <div class="hero-copy max-w-xl">
+            <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neonGreen/30 bg-white/5 text-sm text-neonGreen mb-6">
               <span class="w-2 h-2 rounded-full bg-neonGreen animate-pulse"></span>
               Next-Gen Performance
             </p>
 
-            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight drop-shadow-2xl">
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight">
               The Future of
               <span class="block text-transparent bg-clip-text bg-gradient-to-r from-neonGreen via-white to-neonCyan">
                 iPhone.
               </span>
             </h1>
 
-            <p class="mt-6 text-white/80 text-lg leading-relaxed drop-shadow-lg">
+            <p class="mt-6 text-white/70 text-lg leading-relaxed">
               Ultra-premium titanium design. Unreal speed. Pro camera power.
               Experience the iPhone built to dominate every moment.
             </p>
@@ -88,31 +85,45 @@
               <a href="#pricing" class="btn-neon px-7 py-4 rounded-full font-semibold text-black bg-neonGreen hover:scale-[1.02] transition text-center">
                 Buy Now
               </a>
-              <a href="#features" class="px-7 py-4 rounded-full border border-white/15 bg-black/40 backdrop-blur-md hover:border-neonCyan hover:shadow-[0_0_25px_rgba(0,217,255,0.22)] transition text-center">
+              <a href="#features" class="px-7 py-4 rounded-full border border-white/15 bg-white/5 backdrop-blur-md hover:border-neonCyan hover:shadow-[0_0_25px_rgba(0,217,255,0.22)] transition text-center">
                 Explore Features
               </a>
             </div>
 
             <div class="mt-10 grid grid-cols-3 gap-4 max-w-lg">
-              <div class="glass-card p-4 text-center bg-black/40">
+              <div class="glass-card p-4 text-center">
                 <div class="text-2xl font-bold text-neonCyan">A16</div>
                 <div class="text-xs uppercase tracking-[0.2em] text-white/55 mt-1">Bionic</div>
               </div>
-              <div class="glass-card p-4 text-center bg-black/40">
+              <div class="glass-card p-4 text-center">
                 <div class="text-2xl font-bold text-neonGreen">48MP</div>
                 <div class="text-xs uppercase tracking-[0.2em] text-white/55 mt-1">Camera</div>
               </div>
-              <div class="glass-card p-4 text-center bg-black/40">
+              <div class="glass-card p-4 text-center">
                 <div class="text-2xl font-bold text-white">22H</div>
                 <div class="text-xs uppercase tracking-[0.2em] text-white/55 mt-1">Battery</div>
               </div>
             </div>
           </div>
+
+          <!-- المربع الزجاجي الذي يحتوي على الآيفون -->
+          <div class="relative flex items-center justify-center">
+            <div class="absolute inset-0 mx-auto w-[85%] h-[85%] rounded-full bg-neonCyan/10 blur-3xl"></div>
+            <div class="absolute bottom-6 w-[70%] h-20 bg-neonGreen/15 blur-3xl rounded-full"></div>
+
+            <div class="relative w-full max-w-[620px] h-[450px] sm:h-[600px] rounded-[2rem] glass-strong border border-white/10 overflow-hidden">
+              <div class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-black/40 border border-neonCyan/25 text-xs text-neonCyan">
+                Interactive 3D View
+              </div>
+              <canvas id="iphoneCanvas" class="w-full h-full block"></canvas>
+            </div>
+          </div>
+
         </div>
       </section>
 
       <!-- FEATURES -->
-      <section id="features" class="py-24 md:py-32 relative bg-[#0a0a0a]">
+      <section id="features" class="py-24 md:py-32">
         <div class="max-w-7xl mx-auto px-6">
           <div class="max-w-2xl mb-10 md:mb-16">
             <p class="section-kicker">Features</p>
@@ -164,7 +175,7 @@
       </section>
 
       <!-- SPECS -->
-      <section id="specs" class="py-24 md:py-32 relative bg-[#0a0a0a]">
+      <section id="specs" class="py-24 md:py-32">
         <div class="max-w-7xl mx-auto px-6">
           <div class="max-w-2xl mb-10 md:mb-16">
             <p class="section-kicker">Tech Specs</p>
@@ -191,7 +202,7 @@
       </section>
 
       <!-- PRICING -->
-      <section id="pricing" class="py-24 md:py-32 relative bg-[#0a0a0a]">
+      <section id="pricing" class="py-24 md:py-32">
         <div class="max-w-5xl mx-auto px-6">
           <div class="pricing-card relative overflow-hidden p-8 md:p-12 rounded-[2rem]">
             <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(0,217,255,0.18),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(34,255,136,0.16),_transparent_35%)]"></div>
@@ -227,21 +238,18 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="relative z-10 border-t border-white/10 bg-[#0a0a0a]">
+    <footer class="relative z-10 border-t border-white/10">
       <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6 text-white/60">
         <p class="text-sm">© 2026 iPhone Pro. All rights reserved.</p>
 
         <div class="flex items-center gap-6 text-sm">
           <a href="#" class="hover:text-neonCyan transition">Privacy</a>
           <a href="#" class="hover:text-neonCyan transition">Terms</a>
-          <a href="#" class="0hover:text-neonCyan. transition">Support</a35>
+          <a href="#" class="hover:text-neonCyan transition">Support</a>
         </div>
 
-        <div class);
-="flex items-center gap-4">
-}
-
-          <a href="#".g class="social-icon">⟡</a>
+        <div class="flex items-center gap-4">
+          <a href="#" class="social-icon">⟡</a>
           <a href="#" class="social-icon">◌</a>
           <a href="#" class="social-icon">✦</a>
         </div>
