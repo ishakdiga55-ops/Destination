@@ -1,77 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futuristic iPhone Showcase</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Three.js -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
-    <!-- GLTFLoader for 3D models -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/GLTFLoader.js"></script>
-    <!-- OrbitControls -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- تعديل اسم الهاتف هنا -->
+  <title>iPhone 14 Pro | Futuristic Landing Page</title>
+  <meta name="description" content="Premium iPhone sales landing page with 3D model, neon futuristic design, and high-converting CTA sections." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            space: ['Space Grotesk', 'sans-serif'],
+          },
+          colors: {
+            neonGreen: '#22ff88',
+            neonCyan: '#00d9ff',
+            bgDark: '#0a0a0a',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-[#0a0a0a] text-white font-space-grotesk overflow-x-hidden">
-    <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-8 h-8 bg-gradient-to-br from-green-400 to-cyan-400 rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
-                    </svg>
-                </div>
-                <span class="text-xl font-bold tracking-wider">NEXUS</span>
-            </div>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#" class="hover:text-green-400 transition-colors">Home</a>
-                <a href="#" class="hover:text-green-400 transition-colors">Features</a>
-                <a href="#" class="hover:text-green-400 transition-colors">Specs</a>
-                <a href="#" class="hover:text-green-400 transition-colors">Contact</a>
-            </div>
-            <button class="px-6 py-2 border border-gray-600 rounded-full hover:bg-gray-800 transition-all">
-                Pre-order
-            </button>
-        </div>
-    </nav>
+<body class="bg-[#0a0a0a] text-white font-space overflow-x-hidden">
+  <div class="relative min-h-screen">
+    <!-- Background Glow -->
+    <div class="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,_rgba(0,217,255,0.12),_transparent_35%),radial-gradient(circle_at_bottom,_rgba(34,255,136,0.10),_transparent_35%)]"></div>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-20">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                Titanium.<br>
-                Engineered From Within.
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                The future of design meets unparalleled innovation. Experience the next dimension.
+    <!-- NAV -->
+    <header class="relative z-50">
+      <nav class="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
+        <a href="#" class="text-xl md:text-2xl font-bold tracking-[0.25em] uppercase">
+          <span class="text-neonCyan">iPhone</span><span class="text-neonGreen">Pro</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-8 text-sm text-white/70">
+          <a href="#features" class="hover:text-neonCyan transition">Features</a>
+          <a href="#specs" class="hover:text-neonCyan transition">Specs</a>
+          <a href="#pricing" class="hover:text-neonCyan transition">Pricing</a>
+        </div>
+
+        <a href="#pricing" class="px-5 py-3 rounded-full border border-neonCyan/40 bg-white/5 backdrop-blur-md hover:border-neonGreen hover:shadow-[0_0_25px_rgba(0,217,255,0.25)] transition">
+          Pre-Order
+        </a>
+      </nav>
+    </header>
+
+    <main class="relative z-10">
+      <!-- HERO -->
+      <section class="hero-section min-h-[100svh] flex items-center">
+        <div class="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-10 items-center py-10">
+          <div class="hero-copy max-w-xl">
+            <p class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-neonGreen/30 bg-white/5 text-sm text-neonGreen mb-6">
+              <span class="w-2 h-2 rounded-full bg-neonGreen animate-pulse"></span>
+              Next-Gen Performance
             </p>
-            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <button class="px-8 py-3 bg-transparent border border-gray-600 rounded-full hover:bg-gray-800 transition-all neon-btn">
-                    Explore
-                </button>
-                <button class="px-8 py-3 bg-green-500 hover:bg-green-600 rounded-full transition-all neon-btn">
-                    Learn More
-                </button>
+
+            <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight">
+              The Future of
+              <span class="block text-transparent bg-clip-text bg-gradient-to-r from-neonGreen via-white to-neonCyan">
+                iPhone.
+              </span>
+            </h1>
+
+            <p class="mt-6 text-white/70 text-lg leading-relaxed">
+              Ultra-premium titanium design. Unreal speed. Pro camera power.
+              Experience the iPhone built to dominate every moment.
+            </p>
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <a href="#pricing" class="btn-neon px-7 py-4 rounded-full font-semibold text-black bg-neonGreen hover:scale-[1.02] transition text-center">
+                Buy Now
+              </a>
+              <a href="#features" class="px-7 py-4 rounded-full border border-white/15 bg-white/5 backdrop-blur-md hover:border-neonCyan hover:shadow-[0_0_25px_rgba(0,217,255,0.22)] transition text-center">
+                Explore Features
+              </a>
             </div>
+
+            <div class="mt-10 grid grid-cols-3 gap-4 max-w-lg">
+              <div class="glass-card p-4 text-center">
+                <div class="text-2xl font-bold text-neonCyan">A16</div>
+                <div class="text-xs uppercase tracking-[0.2em] text-white/55 mt-1">Bionic</div>
+              </div>
+              <div class="glass-card p-4 text-center">
+                <div class="text-2xl font-bold text-neonGreen">48MP</div>
+                <div class="text-xs uppercase tracking-[0.2em] text-white/55 mt-1">Camera</div>
+              </div>
+              <div class="glass-card p-4 text-center">
+                <div class="text-2xl font-bold text-white">22H</div>
+                <div class="text-xs uppercase tracking-[0.2em] text-white/55 mt-1">Battery</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative flex items-center justify-center">
+            <div class="absolute inset-0 mx-auto w-[85%] h-[85%] rounded-full bg-neonCyan/10 blur-3xl"></div>
+            <div class="absolute bottom-6 w-[70%] h-20 bg-neonGreen/15 blur-3xl rounded-full"></div>
+
+            <!-- تعديل الارتفاع ليتناسب مع الموبايل -->
+            <div class="relative w-full max-w-[620px] h-[400px] sm:h-[560px] rounded-[2rem] glass-strong border border-white/10 overflow-hidden">
+              <div class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-black/40 border border-neonCyan/25 text-xs text-neonCyan">
+                Interactive 3D View
+              </div>
+              <canvas id="iphoneCanvas" class="w-full h-full block"></canvas>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- 3D Model Container -->
-    <section class="relative w-full h-screen">
-        <div id="model-container" class="w-full h-full"></div>
-    </section>
+      <!-- FEATURES -->
+      <section id="features" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="max-w-2xl mb-10 md:mb-16">
+            <p class="section-kicker">Features</p>
+            <h2 class="section-title">Built to feel futuristic, fast, and premium.</h2>
+          </div>
 
-    <!-- Script -->
-    <script src="script.js"></script>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <article class="feature-card bento-span-2 p-7 md:p-8">
+              <div class="text-neonGreen text-sm uppercase tracking-[0.25em] mb-3">Titanium Build</div>
+              <h3 class="text-2xl md:text-3xl font-bold">Lightweight. Strong. Iconic.</h3>
+              <p class="mt-4 text-white/70 max-w-xl">
+                Aerospace-grade titanium gives the phone a refined, durable feel with a clean, sharp silhouette.
+              </p>
+              <div class="mt-6 h-28 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10"></div>
+            </article>
+
+            <article class="feature-card p-7 md:p-8">
+              <div class="text-neonCyan text-sm uppercase tracking-[0.25em] mb-3">A16 Bionic Chip</div>
+              <h3 class="text-2xl font-bold">Insane speed.</h3>
+              <p class="mt-4 text-white/70">
+                Smooth multitasking, responsive gaming, and pro-level efficiency.
+              </p>
+            </article>
+
+            <article class="feature-card p-7 md:p-8">
+              <div class="text-neonGreen text-sm uppercase tracking-[0.25em] mb-3">Pro Camera System</div>
+              <h3 class="text-2xl font-bold">Capture every detail.</h3>
+              <p class="mt-4 text-white/70">
+                Stunning low-light shots, sharp portraits, and cinematic video in one system.
+              </p>
+            </article>
+
+            <article class="feature-card bento-span-2 p-7 md:p-8">
+              <div class="flex items-end justify-between gap-6 flex-wrap">
+                <div>
+                  <div class="text-white/50 text-sm uppercase tracking-[0.25em] mb-2">Neural Performance</div>
+                  <h3 class="text-2xl md:text-3xl font-bold">Designed for everything you do.</h3>
+                </div>
+                <div class="text-neonCyan text-sm">Optimized for pro workflows</div>
+              </div>
+              <div class="mt-6 grid sm:grid-cols-3 gap-4">
+                <div class="mini-stat">Gaming</div>
+                <div class="mini-stat">Editing</div>
+                <div class="mini-stat">AI Tasks</div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPECS -->
+      <section id="specs" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+          <div class="max-w-2xl mb-10 md:mb-16">
+            <p class="section-kicker">Tech Specs</p>
+            <h2 class="section-title">Everything you need, in a sleek minimal layout.</h2>
+          </div>
+
+          <div class="glass-strong border border-white/10 rounded-[2rem] overflow-hidden">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-white/10">
+              <div class="spec-item">
+                <span class="spec-label">Display</span>
+                <span class="spec-value">6.1-inch Super Retina XDR</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Battery Life</span>
+                <span class="spec-value">Up to 22 hours video playback</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Weight</span>
+                <span class="spec-value">187 grams</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRICING -->
+      <section id="pricing" class="py-24 md:py-32">
+        <div class="max-w-5xl mx-auto px-6">
+          <div class="pricing-card relative overflow-hidden p-8 md:p-12 rounded-[2rem]">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(0,217,255,0.18),_transparent_30%),radial-gradient(circle_at_bottom_left,_rgba(34,255,136,0.16),_transparent_35%)]"></div>
+            <div class="relative z-10 grid lg:grid-cols-[1.15fr_0.85fr] gap-10 items-center">
+              <div>
+                <p class="section-kicker">Pricing</p>
+                <h2 class="section-title">Own the future for $999.</h2>
+                <p class="mt-5 text-white/70 max-w-xl">
+                  Reserve your iPhone today with a bold, premium finish and all-new performance.
+                </p>
+
+                <div class="mt-8">
+                  <p class="text-sm uppercase tracking-[0.25em] text-white/50 mb-3">Select Color</p>
+                  <div class="flex flex-wrap gap-3">
+                    <button class="color-btn active">Titanium Blue</button>
+                    <button class="color-btn">Black</button>
+                    <button class="color-btn">Silver</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-center lg:text-right">
+                <div class="text-6xl md:text-7xl font-bold text-white">$999</div>
+                <div class="mt-3 text-white/60">or from $41.62/mo.</div>
+                <a href="#" class="mt-8 inline-flex items-center justify-center w-full lg:w-auto px-8 py-5 rounded-full bg-neonGreen text-black font-bold text-lg pre-order-btn">
+                  Pre-Order Now
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="relative z-10 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-6 text-white/60">
+        <p class="text-sm">© 2026 iPhone Pro. All rights reserved.</p>
+
+        <div class="flex items-center gap-6 text-sm">
+          <a href="#" class="hover:text-neonCyan transition">Privacy</a>
+          <a href="#" class="hover:text-neonCyan transition">Terms</a>
+          <a href="#" class="hover:text-neonCyan transition">Support</a>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a href="#" class="social-icon">⟡</a>
+          <a href="#" class="social-icon">◌</a>
+          <a href="#" class="social-icon">✦</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128/examples/js/loaders/GLTFLoader.js"></script>
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Your JS -->
+  <script src="script.js"></script>
 </body>
 </html>
